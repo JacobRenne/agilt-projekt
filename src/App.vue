@@ -5,14 +5,9 @@ import NavBar from './components/NavBar.vue';
 
 </script>
 
-
 <template>
-  <Hero />
+  <NavBar />
+  <RouterView />
 </template>
 
-
-<style>
-
-
-
-</style>
+<style></style>

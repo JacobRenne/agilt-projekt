@@ -6,8 +6,6 @@ import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 import './assets/main.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-
-
 const app = createApp(App)
 app.use(router)
 app.mount('#app')
