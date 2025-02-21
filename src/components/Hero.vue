@@ -48,7 +48,7 @@ defineProps({
 <style scoped>
 #hero
 {
-  background: linear-gradient(rgba(78, 87, 212, 0.500), rgba(0, 0, 212, 0.500)),
+  background: linear-gradient(rgba(187, 132, 255, 0.899), rgba(0, 0, 212, 0.548)),
     url("/src/assets/img/hero.jpg");
   background-position: center;
   background-size: cover;
