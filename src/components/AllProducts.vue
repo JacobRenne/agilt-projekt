@@ -29,9 +29,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="bg-light px-4 py-4 pb-5">
+  <section class="bg-dark px-4 py-4 pb-5">
     <div class="container-lg mx-auto">
-      <h4 class="fw-bold text-dark mb-4 text-center">
+      <h4 class="fw-bold text-light mb-4 text-center">
         Utvalda Produkter
       </h4>
       <div class="row g-3">
@@ -47,9 +47,22 @@ onMounted(async () => {
   <section class="bg-dark py-4 d-flex">
     <div v-if="showButton" class="mx-auto my-4 px-3">
       <RouterLink to="/products"
-        class=" bg-primary text-white text-center py-3 px-4 rounded text-decoration-none">
+        class="text-white text-center py-3 px-4 rounded text-decoration-none"
+        id="show-all-button">
         Visa alla produkter
       </RouterLink>
     </div>
   </section>
 </template>
+
+<style scoped>
+#show-all-button
+{
+  background: #bb81f8;
+}
+
+#show-all-button:hover
+{
+  background: #9349e1;
+}
+</style>

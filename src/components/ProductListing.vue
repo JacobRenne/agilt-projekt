@@ -11,15 +11,19 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="bg-white rounded shadow-md position-relative">
+    <div class="rounded shadow-md position-relative" id="bg">
         <div class="p-4">
             <div class="mb-4">
                 <div class="text-secondary my-2">Artikelnr: {{ product.artnr }}
                 </div>
-                <h3 class="fs-6 fw-bold">{{ product.title }}</h3>
+                <h3 class="fs-6 fw-bold text-light">{{ product.title }}</h3>
+            </div>
+            <div class="mb-4">
+                <img :src="product.bild" :alt="product.title"
+                  class="produkt-bild">
             </div>
 
-            <div class="mb-4">
+            <div class="mb-4 text-light">
                 <div class="description-container">
                     {{ product.beskrivning }}
                 </div>
@@ -34,7 +38,8 @@ const props = defineProps({
                 <div
                   class="d-flex justify-content-center justify-content-lg-end">
                     <RouterLink :to="'products/' + product.id"
-                      class="h-100 bg-primary hover-bg-secondary text-white px-4 py-2 rounded text-center text-sm text-decoration-none">
+                      class="h-100 hover-bg-primary text-white px-4 py-2 rounded text-center text-sm text-decoration-none"
+                      id="buy-button">
                         Köp
                     </RouterLink>
                 </div>
@@ -50,5 +55,28 @@ const props = defineProps({
     overflow: hidden;
     line-clamp: 2;
     line-height: 1.5;
+}
+
+.produkt-bild
+{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0.25rem;
+}
+
+#bg
+{
+    background: #413d46;
+}
+
+#buy-button
+{
+    background: #bb81f8;
+}
+
+#buy-button:hover
+{
+    background: #9349e1;
 }
 </style>

@@ -15,27 +15,33 @@ defineProps({
 </script>
 
 <template>
-  <section id="hero" class="vh-100% d-flex align-items-center text-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h1 class="text-uppercase fw-semibold display-5 text-white">
-            {{ title }}
-          </h1>
-          <h5 class="text-white mt-3 mb-4 text-uppercase fw-bold">
-            {{ subtitle }}
-          </h5>
-          <!-- Todo @click="@router.push('ProductListings')" -->
-          <BButton href="#" variant="primary"
-            class="me-2 text-uppercase fw-bold">Köp
-          </BButton>
-          <!-- Todo @click="@router.push('ProductSell')" -->
-          <BButton href="#" variant="light" class="ms-2 text-uppercase fw-bold">
-            Sälj
-          </BButton>
+  <section class="bg-dark">
+    <div class="d-flex align-items-center text-center">
+      <div id="hero">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="text-uppercase fw-semibold display-6 text-white">
+                {{ title }}
+              </h1>
+              <h5 class="text-white mt-3 mb-4 text-uppercase fw-bold">
+                {{ subtitle }}
+              </h5>
+              <!-- Todo @click="@router.push('ProductListings')" -->
+              <BButton href="#" class="me-2 text-uppercase fw-bold py-2 px-5"
+                id="buy-button">Köp
+              </BButton>
+              <!-- Todo @click="@router.push('ProductSell')" -->
+              <BButton href="#" variant="light"
+                class="ms-2 text-uppercase fw-bold py-2 px-5">
+                Sälj
+              </BButton>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
   </section>
 </template>
 
@@ -43,9 +49,26 @@ defineProps({
 #hero
 {
   background: linear-gradient(rgba(78, 87, 212, 0.500), rgba(0, 0, 212, 0.500)),
-    url("/src/assets/img/hero/hero.jpg");
+    url("/src/assets/img/hero.jpg");
   background-position: center;
   background-size: cover;
-  height: 500px;
+  height: 400px;
+  width: 1300px;
+  margin: auto;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+#buy-button
+{
+  background: #bb81f8;
+}
+
+#buy-button:hover
+{
+  background: #9349e1;
 }
 </style>
