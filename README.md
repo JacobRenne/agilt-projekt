@@ -1,29 +1,5 @@
-# agilt-projekt
+### Agil utveckling - Grupparbete
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+1. Grafikbanken
+2. Produkten Grafikbanken är en online affär för alla som vill sälja eller köpa begagnade grafikkort. Den kan användas för att köpa begagnade grafikkkort som blivit renoverade. I motstats till Inet/Blocket så är vår sida fokuserad på begagnade grafikkort som blivit renoverade så att man kan spara pengar utan risken av att köpa från privatperson.
+3. Verktyg som: Vue3 Vite, Bootstrap, axios för att fetcha data som vi har skapat. 
