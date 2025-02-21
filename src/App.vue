@@ -13,6 +13,6 @@ import NavBar from './components/NavBar.vue';
 <style>
 body
 {
-  font-family: Play, sans-serif
+  font-family: "Roboto", sans-serif
 }
 </style>
