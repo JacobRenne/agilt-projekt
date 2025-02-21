@@ -1,5 +1,5 @@
-# Vue 3 + Vite
+### Agil utveckling - Grupparbete
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+1. Grafikbanken
+2. Produkten Grafikbanken är en online affär för alla som vill sälja eller köpa begagnade grafikkort. Den kan användas för att köpa begagnade grafikkkort som blivit renoverade. I motstats till Inet/Blocket så är vår sida fokuserad på begagnade grafikkort som blivit renoverade så att man kan spara pengar utan risken av att köpa från privatperson.
+3. Verktyg som: Vue3 Vite, Bootstrap, axios för att fetcha data som vi har skapat. 
