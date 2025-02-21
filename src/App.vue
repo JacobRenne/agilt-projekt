@@ -10,4 +10,9 @@ import NavBar from './components/NavBar.vue';
   <RouterView />
 </template>
 
-<style></style>
+<style>
+body
+{
+  font-family: Play, sans-serif
+}
+</style>
