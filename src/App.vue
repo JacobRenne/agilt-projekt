@@ -1,7 +1,8 @@
 <script setup>
-import Hero from './components/Hero.vue'
+import { RouterView } from 'vue-router';
+
 </script>
 
 <template>
-  <Hero />
+  <RouterView />
 </template>

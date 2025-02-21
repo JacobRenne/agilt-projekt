@@ -1,6 +1,9 @@
+<script setup>
+import Hero from '../components/Hero.vue'
+import AllProducts from '../components/AllProducts.vue'
+</script>
+
 <template>
-    <div>
-      <h1>Home Page</h1>
-    </div>
+  <Hero />
+  <AllProducts :limit="4" :showButton="true" />
 </template>
-  

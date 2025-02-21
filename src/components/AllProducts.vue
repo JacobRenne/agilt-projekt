@@ -1,0 +1,55 @@
+<script setup>
+import ProductListing from './ProductListing.vue'
+import { ref, defineProps, onMounted, reactive } from 'vue'
+import { RouterLink } from 'vue-router'
+import axios from 'axios'
+
+defineProps({
+  limit: Number,
+  showButton: {
+    type: Boolean,
+    default: false
+  },
+})
+
+const api_url = 'https://67b27350bc0165def8cd952b.mockapi.io/api/products'
+
+const status = reactive({
+  products: [],
+})
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(api_url)
+    status.products = response.data
+  } catch (error) {
+    console.error('Hämta produkt. Misslyckades ', error)
+  }
+})
+</script>
+
+<template>
+  <section class="bg-light px-4 py-4 pb-5">
+    <div class="container-lg mx-auto">
+      <h4 class="fw-bold text-dark mb-4 text-center">
+        Utvalda Produkter
+      </h4>
+      <div class="row g-3">
+        <div class="col-md-3 d-flex flex-column h-100"
+          v-for="product in status.products.slice(0, limit || status.products.length)"
+          :key="product.id">
+          <ProductListing :product="product" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-dark py-4 d-flex">
+    <div v-if="showButton" class="mx-auto my-4 px-3">
+      <RouterLink to="/products"
+        class=" bg-primary text-white text-center py-3 px-4 rounded text-decoration-none">
+        Visa alla produkter
+      </RouterLink>
+    </div>
+  </section>
+</template>
