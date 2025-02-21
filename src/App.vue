@@ -1,22 +1,13 @@
 <script setup>
-import Hero from './components/Hero.vue'
+import { RouterView } from 'vue-router';
+
 import NavBar from './components/NavBar.vue';
 
 </script>
 
-
 <template>
-  <NavBar :searchDisplay="true"/>
-
-  <Hero/>
-
-  <RouterView/>
-
+  <NavBar />
+  <RouterView />
 </template>
 
-
-<style>
-
-
-
-</style>
+<style></style>

@@ -15,11 +15,11 @@ defineProps({
 </script>
 
 <template>
-  <section id="hero" class="min-vh-100 d-flex align-items-center text-center">
+  <section id="hero" class="vh-100% d-flex align-items-center text-center">
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h1 class="text-uppercase fw-semibold display-1 text-white">
+          <h1 class="text-uppercase fw-semibold display-5 text-white">
             {{ title }}
           </h1>
           <h5 class="text-white mt-3 mb-4 text-uppercase fw-bold">
@@ -46,5 +46,6 @@ defineProps({
     url("/src/assets/img/hero/hero.jpg");
   background-position: center;
   background-size: cover;
+  height: 500px;
 }
 </style>
