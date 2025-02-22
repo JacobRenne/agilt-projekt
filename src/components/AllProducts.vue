@@ -47,7 +47,7 @@ onMounted(async () => {
   <section class="bg-dark py-4 d-flex">
     <div v-if="showButton" class="mx-auto my-4 px-3">
       <RouterLink to="/products"
-        class="text-white text-center py-3 px-4 rounded text-decoration-none"
+        class="text-dark text-center py-3 px-4 rounded text-decoration-none fw-bold"
         id="show-all-button">
         Visa alla produkter
       </RouterLink>
@@ -58,11 +58,11 @@ onMounted(async () => {
 <style scoped>
 #show-all-button
 {
-  background: #bb81f8;
+  background: #f8f9fa;
 }
 
 #show-all-button:hover
 {
-  background: #9349e1;
+  background: #d3d5d7;
 }
 </style>
