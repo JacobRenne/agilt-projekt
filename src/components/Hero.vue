@@ -28,8 +28,9 @@ defineProps({
                 {{ subtitle }}
               </h5>
               <!-- Todo @click="@router.push('ProductListings')" -->
-              <BButton href="#" class="me-2 text-uppercase fw-bold py-2 px-5"
-                id="buy-button">Köp
+              <BButton href="#" variant="dark"
+                class="me-2 text-uppercase fw-bold py-2 px-5">
+                Köp
               </BButton>
               <!-- Todo @click="@router.push('ProductSell')" -->
               <BButton href="#" variant="light"
@@ -48,7 +49,7 @@ defineProps({
 <style scoped>
 #hero
 {
-  background: linear-gradient(rgba(187, 132, 255, 0.899), rgba(0, 0, 212, 0.548)),
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 212, 0.5)),
     url("/src/assets/img/hero.jpg");
   background-position: center;
   background-size: cover;
@@ -60,15 +61,5 @@ defineProps({
   padding-bottom: 10px;
   display: flex;
   align-items: center;
-}
-
-#buy-button
-{
-  background: #bb81f8;
-}
-
-#buy-button:hover
-{
-  background: #9349e1;
 }
 </style>
