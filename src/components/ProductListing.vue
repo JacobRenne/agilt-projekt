@@ -18,11 +18,12 @@ const props = defineProps({
                 </div>
                 <h3 class="fs-6 fw-bold text-light">{{ product.title }}</h3>
             </div>
-            <div class="mb-4">
-                <img :src="product.bild" :alt="product.title"
-                  class="produkt-bild">
+            <div class="row mb-4">
+                <div class="col-10">
+                    <img :src="product.bild" :alt="product.title"
+                      class="img-fluid">
+                </div>
             </div>
-
             <div class="mb-4 text-light">
                 <div class="description-container">
                     {{ product.beskrivning }}
