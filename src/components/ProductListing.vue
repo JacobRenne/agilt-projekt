@@ -13,9 +13,9 @@ const props = defineProps({
 <template>
     <div class="rounded shadow-md position-relative" id="bg">
         <div class="p-4">
-                <div class="text-secondary my-2">Artikelnr: {{ product.artnr }}
-                </div>
-                <h3 class="fs-6 fw-bold text-light">{{ product.title }}</h3>
+            <div class="text-secondary my-2">Artikelnr: {{ product.artnr }}
+            </div>
+            <h3 class="fs-6 fw-bold text-light">{{ product.title }}</h3>
             <div class="row mb-2">
                 <div class="col-10">
                     <img :src="product.bild" :alt="product.title"
@@ -29,13 +29,11 @@ const props = defineProps({
             </div>
             <div class="border border-light mb-4"></div>
 
-            <div
-              class="d-flex flex-row flex-lg-row justify-content-between">
+            <div class="d-flex flex-row flex-lg-row justify-content-between">
                 <div class="text-light fw-bold mb-3">
                     {{ product.pris }} kr
                 </div>
-                <div
-                  class="d-flex">
+                <div class="d-flex">
                     <RouterLink :to="'products/' + product.id"
                       class="h-100 hover-bg-primary text-white px-4 py-2 rounded text-center text-sm text-decoration-none fw-bold"
                       id="buy-button">

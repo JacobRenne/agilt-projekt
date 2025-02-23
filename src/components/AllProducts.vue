@@ -2,6 +2,7 @@
 import ProductListing from './ProductListing.vue'
 import { ref, defineProps, onMounted, reactive } from 'vue'
 import { RouterLink } from 'vue-router'
+import { BSpinner } from 'bootstrap-vue-next'
 import axios from 'axios'
 
 defineProps({
@@ -16,6 +17,7 @@ const api_url = 'https://67b27350bc0165def8cd952b.mockapi.io/api/products'
 
 const status = reactive({
   products: [],
+  loading: true,
 })
 
 onMounted(async () => {
@@ -24,6 +26,9 @@ onMounted(async () => {
     status.products = response.data
   } catch (error) {
     console.error('Hämta produkt. Misslyckades ', error)
+  }
+  finally {
+    status.loading = false;
   }
 })
 </script>
@@ -35,6 +40,9 @@ onMounted(async () => {
         Utvalda Produkter
       </h4>
       <div class="row g-3">
+        <div v-if="status.loading" class="text-center">
+          <b-spinner variant="light" label="loading..."></b-spinner>
+        </div>
         <div class="col-md-3 d-flex flex-column h-100"
           v-for="product in status.products.slice(0, limit || status.products.length)"
           :key="product.id">
