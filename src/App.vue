@@ -17,8 +17,4 @@ body
 {
   font-family: "Roboto", sans-serif
 }
-
-html, body {
-  height: 100%;
-}
 </style>
