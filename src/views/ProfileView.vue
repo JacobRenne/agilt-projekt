@@ -1,4 +1,66 @@
+<script setup>
+import { ref, watch } from "vue";
+import NavBar from "../components/NavBar.vue";
+
+const props = defineProps({
+  activa: {
+    type: Number,
+    default: 0,
+  },
+  hamtade: {
+    type: Number,
+    default: 0,
+  },
+  avbestallda: {
+    type: Number,
+    default: 0,
+  },
+  service: {
+    type: Number,
+    default: 0,
+  },
+});
+
+const options = [
+  { text: "Beställningar", value: "orders" },
+  { text: "Profilinställningar", value: "profilesettings" },
+  { text: "Önskelistor", value: "wishlist" },
+];
+
+const options2 = [
+  { text: "Aktiva " + props.activa, value: "active" },
+  { text: "Hamtade/Skickade " + props.hamtade, value: "hamtade" },
+  { text: "Avbeställda " + props.avbestallda, value: "avbestallda" },
+  { text: "Service " + props.service, value: "service" },
+];
+
+const selected = ref("orders");
+const selected2 = ref("active");
+
+const showOrders = ref(true);
+const showProfileSettings = ref(false);
+const showWishlist = ref(false);
+
+watch(selected, (newValue) => {
+  if (newValue === "orders") {
+    showOrders.value = true;
+    showProfileSettings.value = false;
+    showWishlist.value = false;
+  } else if (newValue === "profilesettings") {
+    showOrders.value = false;
+    showProfileSettings.value = true;
+    showWishlist.value = false;
+  } else if (newValue === "wishlist") {
+    showOrders.value = false;
+    showProfileSettings.value = false;
+    showWishlist.value = true;
+  }
+});
+</script>
+
 <template>
+  <NavBar :searchDisplay="false" />
+
   <div class="container bg-white p-4 rounded shadow-sm">
     <div class="row">
       <div class="col-md-3 bg-light p-3 rounded">
@@ -63,65 +125,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, defineProps, watch } from "vue";
-
-const props = defineProps({
-  activa: {
-    type: Number,
-    default: 0,
-  },
-  hamtade: {
-    type: Number,
-    default: 0,
-  },
-  avbestallda: {
-    type: Number,
-    default: 0,
-  },
-  service: {
-    type: Number,
-    default: 0,
-  },
-});
-
-const options = [
-  { text: "Bestälningar", value: "orders" },
-  { text: "Profilinställningar", value: "profilesettings" },
-  { text: "Önskelistor", value: "wishlist" },
-];
-
-const options2 = [
-  { text: "Aktiva " + props.activa, value: "active" },
-  { text: "Hamtade/Skickade " + props.hamtade, value: "hamtade" },
-  { text: "Avbeställda " + props.avbestallda, value: "avbestallda" },
-  { text: "Service " + props.service, value: "service" },
-];
-
-const selected = ref("orders");
-const selected2 = ref("active");
-
-const showOrders = ref(true);
-const showProfileSettings = ref(false);
-const showWishlist = ref(false);
-
-watch(selected, (newValue) => {
-  if (newValue === "orders") {
-    showOrders.value = true;
-    showProfileSettings.value = false;
-    showWishlist.value = false;
-  } else if (newValue === "profilesettings") {
-    showOrders.value = false;
-    showProfileSettings.value = true;
-    showWishlist.value = false;
-  } else if (newValue === "wishlist") {
-    showOrders.value = false;
-    showProfileSettings.value = false;
-    showWishlist.value = true;
-  }
-});
-</script>
 
 <style scoped>
 .profile-settings {
