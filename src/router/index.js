@@ -7,7 +7,7 @@ import SellView from '../views/SellView.vue'
 
 
 const routes = [
-  { path: '/', name: 'Home', component: HomeView },
+  { path: '/', name: 'hem', component: HomeView },
   { path: '/profile', name: 'Profile', component: ProfileView },
   { path: '/cart', name: 'Cart', component: CartView },
   { path: '/products', name: 'Products', component: ProductsView },

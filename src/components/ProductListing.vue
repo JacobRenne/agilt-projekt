@@ -37,7 +37,7 @@ const props = defineProps({
                     <RouterLink :to="'products/' + product.id"
                       class="h-100 hover-bg-primary text-white px-4 py-2 rounded text-center text-sm text-decoration-none fw-bold"
                       id="buy-button">
-                        Köp
+                        Välj
                     </RouterLink>
                 </div>
             </div>
@@ -54,14 +54,6 @@ const props = defineProps({
     line-height: 1.5;
 }
 
-.produkt-bild
-{
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 0.25rem;
-}
-
 #bg
 {
     background: #413d46;
@@ -75,5 +67,12 @@ const props = defineProps({
 #buy-button:hover
 {
     background: #6b6f71;
+}
+
+.img-fluid
+{
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup>
 import ProductListing from './ProductListing.vue'
-import { ref, defineProps, onMounted, reactive } from 'vue'
+import { defineProps, onMounted, reactive } from 'vue'
 import { RouterLink } from 'vue-router'
 import { BSpinner } from 'bootstrap-vue-next'
 import axios from 'axios'
@@ -25,7 +25,7 @@ onMounted(async () => {
     const response = await axios.get(api_url)
     status.products = response.data
   } catch (error) {
-    console.error('Hämta produkt. Misslyckades ', error)
+    console.error('Hämta produkter. Misslyckades ', error)
   }
   finally {
     status.loading = false;
@@ -37,7 +37,7 @@ onMounted(async () => {
   <section class="bg-dark px-4 py-4 pb-5">
     <div class="container-lg mx-auto">
       <h4 class="fw-bold text-light mb-4 text-center">
-        Utvalda Produkter
+        Produkter
       </h4>
       <div class="row g-3">
         <div v-if="status.loading" class="text-center">

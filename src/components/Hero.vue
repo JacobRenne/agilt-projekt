@@ -1,7 +1,6 @@
 <script setup>
 import { defineProps } from 'vue'
 
-
 defineProps({
   title: {
     type: String,
@@ -15,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-  <section class="bg-dark">
+  <section class="bg-dark pt-2">
     <div class="d-flex align-items-center text-center">
       <div id="hero">
         <div class="container">
@@ -27,11 +26,12 @@ defineProps({
               <h5 class="text-white mt-3 mb-4 text-uppercase fw-bold">
                 {{ subtitle }}
               </h5>
-              <!-- Todo @click="@router.push('ProductListings')" -->
-              <BButton href="#" variant="dark"
-                class="me-2 text-uppercase fw-bold py-2 px-5">
-                Köp
-              </BButton>
+              <RouterLink>
+                <BButton to="/products" variant="dark"
+                  class="me-2 text-uppercase fw-bold py-2 px-5">
+                  Köp
+                </BButton>
+              </RouterLink>
               <!-- Todo @click="@router.push('ProductSell')" -->
               <BButton href="#" variant="light"
                 class="ms-2 text-uppercase fw-bold py-2 px-5">
