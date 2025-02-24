@@ -1,13 +1,15 @@
 <script setup>
 import { RouterView } from 'vue-router';
-import NavBar from './components/NavBar.vue';
-import SmallNavBar from './components/SmallNavBar.vue';
+import Footer from './components/Footer.vue';
 </script>
 
 <template>
-  <NavBar :searchDisplay="true" />
-  <SmallNavBar />
-  <RouterView />
+  <div class="d-flex flex-column min-vh-100">
+    <div class="flex-grow-1">
+      <RouterView />
+    </div>
+    <Footer />
+  </div>
 </template>
 
 <style>
