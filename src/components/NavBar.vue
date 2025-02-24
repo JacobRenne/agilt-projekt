@@ -15,10 +15,10 @@ defineProps({
 
   <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
     <div
-      class="container-fluid d-flex justify-content-center gap-4 align-items-center">
+      class="container-fluid d-flex justify-content-center gap-5 align-items-center">
       <RouterLink to="/" class="navbar-brand">Grafikbanken</RouterLink>
 
-      <form class="d-flex mx-auto" role="search" v-if="searchDisplay">
+      <form class="d-flex" role="search" v-if="searchDisplay">
         <input class="form-control me-3" type="search" placeholder="Search"
           aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
@@ -35,4 +35,8 @@ defineProps({
 
 </template>
 
-<style scoped></style>
+<style scoped>
+
+
+
+</style>
