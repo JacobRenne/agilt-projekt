@@ -60,6 +60,7 @@ watch(selected, (newValue) => {
 
 <template>
   <NavBar :searchDisplay="false" />
+  <SmallNavBar />
 
   <div class="container bg-white p-4 rounded shadow-sm">
     <div class="row">
