@@ -60,38 +60,23 @@ watch(selected, (newValue) => {
 </script>
 
 <template>
-  <NavBar :searchDisplay="false" />
-  <SmallNavBar />
 
   <div class="container bg-white p-4 rounded shadow-sm">
     <div class="row">
       <div class="col-md-3 bg-light p-3 rounded">
-        <BFormRadioGroup
-          v-model="selected"
-          :options="options"
-          name="radios-btn-group1"
-          size="lg"
-          buttons
-          stacked
-        />
+        <BFormRadioGroup v-model="selected" :options="options"
+          name="radios-btn-group1" size="lg" buttons stacked />
       </div>
       <div v-if="showOrders" class="col-md-9">
         <h1 class="h4 mb-3">Mina ordrar</h1>
         <p>Här hittar du samtliga beställningar.</p>
         <div class="mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Sök efter produktnamn eller ordernummer"
-          />
+          <input type="text" class="form-control"
+            placeholder="Sök efter produktnamn eller ordernummer" />
         </div>
         <div>
-          <BFormRadioGroup
-            v-model="selected2"
-            :options="options2"
-            name="radios-btn-group2"
-            buttons
-          />
+          <BFormRadioGroup v-model="selected2" :options="options2"
+            name="radios-btn-group2" buttons />
         </div>
         <select class="form-control mb-3">
           <option value="">Orderstatus</option>
@@ -130,7 +115,8 @@ watch(selected, (newValue) => {
 </template>
 
 <style scoped>
-.profile-settings {
+.profile-settings
+{
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;

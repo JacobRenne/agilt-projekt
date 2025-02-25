@@ -4,6 +4,7 @@ import ProfileView from '../views/ProfileView.vue'
 import CartView from '../views/CartView.vue'
 import ProductsView from '../views/ProductsView.vue'
 import SellView from '../views/SellView.vue'
+import SingleProductView from '../views/SingleProductView.vue'
 
 
 const routes = [
@@ -12,6 +13,7 @@ const routes = [
   { path: '/cart', name: 'Cart', component: CartView },
   { path: '/products', name: 'Products', component: ProductsView },
   { path: '/sell', name: 'Sell', component: SellView },
+  { path: '/products/:id', name: 'Product', component: SingleProductView },
 ]
 
 const router = createRouter({
