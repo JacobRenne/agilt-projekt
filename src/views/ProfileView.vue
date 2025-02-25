@@ -1,7 +1,5 @@
 <script setup>
 import { ref, watch } from "vue";
-import NavBar from "../components/NavBar.vue";
-import SmallNavBar from "../components/SmallNavBar.vue";
 
 const props = defineProps({
   activa: {
