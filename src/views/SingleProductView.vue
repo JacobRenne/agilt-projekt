@@ -20,16 +20,13 @@ onMounted(async () => {
   } catch (error) {
     console.error("Gick ej att hämta produkt", error);
   }
-  console.log(status.product);
 });
 
-console.log(status.product);
-
-function saveToWishList(product) {
-  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-  if (!favorites.some((fav) => fav.productID === status.product)) {
-    favorites.push(status.product);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
+function saveToWishList() {
+  let wishList = JSON.parse(sessionStorage.getItem("wishList")) || [];
+  if (!wishList.some((wiLs) => wiLs.id === status.product.id)) {
+    wishList.push(status.product);
+    sessionStorage.setItem("wishList", JSON.stringify(wishList));
   }
 }
 </script>
@@ -40,11 +37,20 @@ function saveToWishList(product) {
       <div class="row">
         <main class="col-md-8">
           <div class="card mb-2 border-0">
-            <div class="card-body rounded text-white text-center text-md-start" id="bg">
+            <div
+              class="card-body rounded text-white text-center text-md-start"
+              id="bg"
+            >
               <p>Artikelnr: {{ status.product.artnr }}</p>
               <h4 class="card-title">{{ status.product.title }}</h4>
-              <div class="d-flex align-items-center justify-content-center justify-content-md-start"></div>
-              <img :src="status.product.bild" :alt="status.product.title" class="img-fluid" />
+              <div
+                class="d-flex align-items-center justify-content-center justify-content-md-start"
+              ></div>
+              <img
+                :src="status.product.bild"
+                :alt="status.product.title"
+                class="img-fluid"
+              />
             </div>
           </div>
         </main>
@@ -61,7 +67,12 @@ function saveToWishList(product) {
             <div class="card-body" id="bg">
               <h3 class="text-white">{{ status.product.pris }} kr</h3>
               <button class="btn btn-success btn-block">Köp</button>
-              <button class="btn btn-danger btn-block ms-2" @click="saveToWishList(product)">Add to wishlist</button>
+              <button
+                class="btn btn-danger btn-block ms-2"
+                @click="saveToWishList"
+              >
+                Add to wishlist
+              </button>
             </div>
           </div>
         </aside>

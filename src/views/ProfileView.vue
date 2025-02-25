@@ -1,8 +1,23 @@
 <script setup>
-import { ref, watch } from "vue";
-import NavBar from "../components/NavBar.vue";
-import SmallNavBar from "../components/SmallNavBar.vue";
+import { ref, watch, onMounted } from "vue";
+import WishList from "../components/WishList.vue";
 
+const user = ref(
+  JSON.parse(localStorage.getItem("user")) || {
+    id: 1,
+    name: "John Doe",
+    email: "exempel@email.se",
+    phone: "+46 123456789",
+    address: "exempel väg 1",
+    password: "",
+  }
+);
+
+onMounted(() => {
+  localStorage.setItem("user", JSON.stringify(user.value));
+});
+
+const wishList = ref(JSON.parse(sessionStorage.getItem("wishList")) || []);
 const props = defineProps({
   activa: {
     type: Number,
@@ -25,7 +40,7 @@ const props = defineProps({
 const options = [
   { text: "Beställningar", value: "orders" },
   { text: "Profilinställningar", value: "profilesettings" },
-  { text: "Önskelistor", value: "wishlist" },
+  { text: "Önskelista", value: "wishlist" },
 ];
 
 const options2 = [
@@ -57,23 +72,46 @@ watch(selected, (newValue) => {
     showWishlist.value = true;
   }
 });
+
+const saveUserInfo = () => {
+  localStorage.setItem("user", JSON.stringify(user.value));
+};
 </script>
 
 <template>
   <section class="bg-dark">
-    <div class="container p-4 mt-3 rounded shadow-sm" style="background-color: #333333">
+    <div
+      class="container p-4 mt-3 rounded shadow-sm"
+      style="background-color: #333333"
+    >
       <div class="row">
         <div class="col-md-3 p-3 rounded" style="background-color: #333333">
-          <BFormRadioGroup v-model="selected" :options="options" name="radios-btn-group1" size="lg" buttons stacked />
+          <BFormRadioGroup
+            v-model="selected"
+            :options="options"
+            name="radios-btn-group1"
+            size="lg"
+            buttons
+            stacked
+          />
         </div>
         <div v-if="showOrders" class="col-md-9 text-light">
           <h1 class="h4 mb-3">Mina ordrar</h1>
           <p>Här hittar du samtliga beställningar.</p>
           <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Sök efter produktnamn eller ordernummer" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Sök efter produktnamn eller ordernummer"
+            />
           </div>
           <div>
-            <BFormRadioGroup v-model="selected2" :options="options2" name="radios-btn-group2" buttons />
+            <BFormRadioGroup
+              v-model="selected2"
+              :options="options2"
+              name="radios-btn-group2"
+              buttons
+            />
           </div>
           <select class="form-control mb-3">
             <option value="">Orderstatus</option>
@@ -84,27 +122,62 @@ watch(selected, (newValue) => {
           <h1 class="h4 mb-3">Profilinställningar</h1>
           <p>Här kan du se dina profilinställningar.</p>
           <div>
-            <p class="profile-settings">Namn: Jhon Doe</p>
-            <p class="profile-settings">E-postadress: exempel@email.se</p>
-            <p class="profile-settings">Telefonnummer: +46 123456789</p>
-            <p class="profile-settings">Adress: exempel väg 1</p>
+            <p class="profile-settings">Namn: {{ user.name }}</p>
+            <p class="profile-settings">E-postadress: {{ user.email }}</p>
+            <p class="profile-settings">Telefonnummer: {{ user.phone }}</p>
+            <p class="profile-settings">Adress: {{ user.address }}</p>
           </div>
           <p>Här kan du ändra dina profilinställningar.</p>
           <div>
             <BFormGroup class="mb-3">
-              <BFormInput class="mb-2" type="email" placeholder="E-postadress" />
-              <BFormInput class="mb-2" type="tel" placeholder="Telefonnummer" />
-              <BFormInput class="mb-2" type="text" placeholder="Adress" />
-              <BFormInput class="mb-2" type="password" placeholder="Nytt lösenord" />
-              <BFormInput class="mb-2" type="password" placeholder="Bekräfta nytt lösenord" />
+              <BFormInput
+                class="mb-2"
+                type="text"
+                v-model="user.name"
+                placeholder="Namn"
+              />
+              <BFormInput
+                class="mb-2"
+                type="email"
+                v-model="user.email"
+                placeholder="E-postadress"
+              />
+              <BFormInput
+                class="mb-2"
+                type="tel"
+                v-model="user.phone"
+                placeholder="Telefonnummer"
+              />
+              <BFormInput
+                class="mb-2"
+                type="text"
+                v-model="user.address"
+                placeholder="Adress"
+              />
+              <BFormInput
+                class="mb-2"
+                type="password"
+                v-model="user.password"
+                placeholder="Nytt lösenord"
+              />
+              <BFormInput
+                class="mb-2"
+                type="password"
+                placeholder="Bekräfta nytt lösenord"
+              />
             </BFormGroup>
-            <BButton variant="primary">Spara</BButton>
+            <BButton variant="primary" @click="saveUserInfo">Spara</BButton>
           </div>
         </div>
         <div v-if="showWishlist" class="col-md-9 text-light">
-          <h1 class="h4 mb-3">Önskelistor</h1>
-          <p>Här kan du se dina önskelistor.</p>
-          <p class="fst-italic">Inga önskelistor hittades</p>
+          <h1 class="h4 mb-3">Önskelista</h1>
+          <p>Här kan du se din önskelista.</p>
+          <div v-if="wishList.length > 0">
+            <WishList />
+          </div>
+          <div v-else>
+            <p class="fst-italic">Din önskelista är tom</p>
+          </div>
         </div>
       </div>
     </div>
