@@ -17,10 +17,29 @@ onMounted(async () => {
   try {
     const response = await axios.get(`${api_url}/${productId}`);
     status.product = response.data;
+    console.log(response.data)
   } catch (error) {
     console.error("Gick ej att hämta produkt", error);
   }
 });
+
+function addToCart() {
+  let cart = []
+  if (JSON.parse(localStorage.getItem('cart'))) {
+    cart = JSON.parse(localStorage.getItem('cart'))
+  }
+
+  cart.push({
+    id: status.product.id,
+    title: status.product.title,
+    pris: status.product.pris,
+    bild: status.product.bild
+  })
+
+  localStorage.setItem('cart', JSON.stringify(cart))
+  alert(`${status.product.title} har lagts till i varukorgen!`)
+
+}
 
 function saveToWishList() {
   let wishList = JSON.parse(sessionStorage.getItem("wishList")) || [];
@@ -66,7 +85,7 @@ function saveToWishList() {
           <div class="card border-0 mb-2">
             <div class="card-body" id="bg">
               <h3 class="text-white">{{ status.product.pris }} kr</h3>
-              <button class="btn btn-success btn-block">Köp</button>
+              <button class="btn btn-success btn-block" @click="addToCart">Köp</button>
               <button
                 class="btn btn-danger btn-block ms-2"
                 @click="saveToWishList"
