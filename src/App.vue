@@ -1,6 +1,8 @@
 <script setup>
-import { RouterView } from 'vue-router';
-import Footer from './components/Footer.vue';
+import { RouterView } from "vue-router";
+import Footer from "./components/Footer.vue";
+import NavBar from "./components/NavBar.vue";
+import SmallNavBar from "./components/SmallNavBar.vue";
 </script>
 
 <template>
@@ -25,5 +27,4 @@ body
   background: #121212;
   color: #ffffff;
   padding: 2rem 0;
-}
 </style>
