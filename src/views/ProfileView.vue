@@ -13,6 +13,8 @@ const user = ref(
   }
 );
 
+const orders = ref(JSON.parse(localStorage.getItem('orders') || '[]' ))
+
 onMounted(() => {
   localStorage.setItem("user", JSON.stringify(user.value));
 });
@@ -105,18 +107,34 @@ const saveUserInfo = () => {
               placeholder="Sök efter produktnamn eller ordernummer"
             />
           </div>
-          <div>
-            <BFormRadioGroup
-              v-model="selected2"
-              :options="options2"
-              name="radios-btn-group2"
-              buttons
-            />
+          <div v-if="orders.length > 0">
+            <table class="table table-dark m-0">
+              <thead class="">
+                <tr>
+                  <th>Produkt</th>
+                  <th>Pris</th>
+                  <th>Orderstatus</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr v-for="item in orders" :key="item.id" class="">
+                  <td class="d-flex align-items-center gap-2 border-0">
+                    <img :src="item.bild" :alt="item.title" class="image-thumbnail d-none d-sm-block" style="width: 90px;">
+                    <RouterLink :to="'products/' + item.id" class="text-white text-decoration-none">
+                      <p class="m-0">{{ item.title }}</p>
+                    </RouterLink>
+                  </td>
+                  <td class="align-middle border-0">
+                    <p class="m-0">{{ item.pris }}</p>
+                  </td>
+                  <td class="align-middle border-0">
+                    <p class="m-0">Levereras</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <select class="form-control mb-3">
-            <option value="">Orderstatus</option>
-          </select>
-          <p class="fst-italic">Inga beställningar hittades</p>
+          <div v-else><p>Du har inga beställningar</p></div>
         </div>
         <div v-if="showProfileSettings" class="col-md-9 text-light">
           <h1 class="h4 mb-3">Profilinställningar</h1>
