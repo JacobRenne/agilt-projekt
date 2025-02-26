@@ -55,10 +55,11 @@ function saveToWishList() {
       <div class="row">
         <main class="col-md-8">
           <div class="card mb-3 product-card">
-            <div class="d-flex justify-content-center my-3">
-              <img :src="status.product.bild" :alt="status.product.title"
-                class="img-fluid">
-            </div>
+              <div class="d-flex justify-content-center my-3">
+                <img :src="status.product.bild" :alt="status.product.title"
+                  class="img-fluid">
+              </div>
+
           </div>
         </main>
 
@@ -80,12 +81,14 @@ function saveToWishList() {
           <div class="card product-card">
             <div class="card-body text-center">
               <h3 class="text-white">{{ status.product.pris }} kr</h3>
-              <button class="btn btn-primary w-100"
-                @click="addToCart">Köp</button>
-              <button class="btn btn-danger mt-2 w-100"
-                @click="saveToWishList">
+              <button class="btn btn-primary w-100" @click="addToCart">Köp</button>
+              <button
+                class="btn btn-danger btn-block ms-2"
+                @click="saveToWishList"
+              >
                 Add to wishlist
               </button>
+              
             </div>
           </div>
         </aside>
@@ -152,13 +155,11 @@ function saveToWishList() {
   background: #413d46;
 }
 
-.img-fluid
-{
-  max-width: 500px;
-  object-fit: contain;
+.img-fluid {
+  max-width: 450px;
+  object-fit: cover;
   display: block;
   margin-left: auto;
   margin-right: auto;
-
 }
 </style>
