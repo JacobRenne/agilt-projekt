@@ -1,6 +1,7 @@
 <script setup>
-import { reactive, onMounted } from "vue";
-import { useRoute } from "vue-router";
+
+import { reactive, onMounted, ref } from "vue";
+import { useRoute, RouterLink, useRouter } from "vue-router";
 import axios from "axios";
 
 const route = useRoute();
@@ -54,10 +55,10 @@ function saveToWishList() {
       <div class="row">
         <main class="col-md-8">
           <div class="card mb-3 product-card">
-              <div class="d-flex justify-content-center my-3">
-                <img :src="status.product.bild" :alt="status.product.title"
-                  class="img-fluid">
-              </div>
+            <div class="d-flex justify-content-center my-3">
+              <img :src="status.product.bild" :alt="status.product.title"
+                class="img-fluid">
+            </div>
           </div>
         </main>
 
@@ -70,14 +71,19 @@ function saveToWishList() {
             </div>
           </div>
 
-          <div class="card border-0 mb-2">
-            <div class="card-body" id="bg">
+          <div class="card mb-3 product-card">
+            <div class="card-body">
+              <h3 class="text-white">Beskrivning:</h3>
+              <p class="text-light">{{ status.product.beskrivning }}</p>
+            </div>
+          </div>
+          <div class="card product-card">
+            <div class="card-body text-center">
               <h3 class="text-white">{{ status.product.pris }} kr</h3>
-              <button class="btn btn-success btn-block" @click="addToCart">Köp</button>
-              <button
-                class="btn btn-danger btn-block ms-2"
-                @click="saveToWishList"
-              >
+              <button class="btn btn-primary w-100"
+                @click="addToCart">Köp</button>
+              <button class="btn btn-danger mt-2 w-100"
+                @click="saveToWishList">
                 Add to wishlist
               </button>
             </div>
@@ -139,5 +145,20 @@ function saveToWishList() {
 .btn-primary:hover
 {
   background-color: #9a67ea;
+}
+
+#bg
+{
+  background: #413d46;
+}
+
+.img-fluid
+{
+  max-width: 500px;
+  object-fit: contain;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 </style>
