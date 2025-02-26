@@ -7,16 +7,23 @@ import Footer from './components/Footer.vue';
   <NavBar />
   <SmallNavBar />
   <div class="d-flex flex-column min-vh-100">
-    <div class="flex-grow-1">
+    <div class="flex-grow-1" id="bg">
       <RouterView />
     </div>
-    <Footer />
   </div>
+  <Footer />
 </template>
 
 <style>
 body
 {
-  font-family: "Roboto", sans-serif
+  font-family: "Roboto", sans-serif;
+}
+
+#bg
+{
+  background: #121212;
+  color: #ffffff;
+  padding: 2rem 0;
 }
 </style>

@@ -3,5 +3,5 @@ import AllProducts from '../components/AllProducts.vue';
 </script>
 
 <template>
-  <AllProducts :limit="8"/>
+  <AllProducts />
 </template>
