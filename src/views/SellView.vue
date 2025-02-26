@@ -88,9 +88,6 @@ const selectImage = (imageUrl) => {
       </h4>
   <section class="container text-white section-card pt-4">
     <form class="row g-3 small" @submit.prevent="handleSubmit">
-
-      
-
       <div class="col-md-5">
         <label class="form-label">Annonsens namn</label>
         <select v-model="form.title" id="title" name="title" class="form-select"
@@ -290,11 +287,4 @@ h2
   border: none;
 }
 
-#gridCheck
-{
-  color: #bb86fc;
-}
 </style>
-
-
-

@@ -50,7 +50,6 @@ function saveToWishList() {
 </script>
 
 <template>
-
   <section class="product-section d-flex flex-column">
     <div class="container py-4 flex-grow-1">
       <div class="row">
@@ -79,17 +78,16 @@ function saveToWishList() {
               <p class="text-light">{{ status.product.beskrivning }}</p>
             </div>
           </div>
-
           <div class="card product-card">
             <div class="card-body text-center">
-              <h3 class="text-white">{{ status.product.pris }} kr</h3>
-              <button class="btn btn-primary w-100"
-                @click="addToCart">Köp</button>
-              <button class="btn btn-danger btn-block ms-2"
+              <h3 class="text-primary">{{ status.product.pris }} kr</h3>
+
+              <button class="btn btn-secondary w-100 mb-2 p-12"
                 @click="saveToWishList">
                 Add to wishlist
               </button>
-
+              <button class="btn btn-primary w-100"
+                @click="addToCart">Köp</button>
             </div>
           </div>
         </aside>
@@ -156,12 +154,17 @@ function saveToWishList() {
   background: #413d46;
 }
 
-.img-fluid
+.btn-secondary
 {
-  max-width: 450px;
-  object-fit: cover;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  background-color: #d73447;
+  border: none;
+  padding: 12px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+}
+
+.btn-secondary:hover
+{
+  background-color: #d0283b;
 }
 </style>
