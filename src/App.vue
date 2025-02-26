@@ -9,7 +9,7 @@ import SmallNavBar from "./components/SmallNavBar.vue";
   <NavBar />
   <SmallNavBar />
   <div class="d-flex flex-column min-vh-100">
-    <div class="bg-dark flex-grow-1">
+    <div class="flex-grow-1" id="bg">
       <RouterView />
     </div>
   </div>
@@ -17,7 +17,14 @@ import SmallNavBar from "./components/SmallNavBar.vue";
 </template>
 
 <style>
-body {
+body
+{
   font-family: "Roboto", sans-serif;
 }
+
+#bg
+{
+  background: #121212;
+  color: #ffffff;
+  padding: 2rem 0;
 </style>

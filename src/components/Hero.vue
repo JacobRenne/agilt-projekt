@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps } from 'vue'
+import { RouterLink } from 'vue-router';
 
 defineProps({
   title: {
@@ -14,7 +15,7 @@ defineProps({
 </script>
 
 <template>
-  <section class="bg-dark pt-2">
+  <section class="pt-2" id="bg">
     <div class="d-flex align-items-center text-center">
       <div id="hero">
         <div class="container">
@@ -26,17 +27,18 @@ defineProps({
               <h5 class="text-white mt-3 mb-4 text-uppercase fw-bold">
                 {{ subtitle }}
               </h5>
-              <RouterLink>
-                <BButton to="/products" variant="dark"
+              <RouterLink to="/products">
+                <BButton variant="dark"
                   class="me-2 text-uppercase fw-bold py-2 px-5">
                   Köp
                 </BButton>
               </RouterLink>
-              <!-- Todo @click="@router.push('ProductSell')" -->
-              <BButton href="#" variant="light"
-                class="ms-2 text-uppercase fw-bold py-2 px-5">
-                Sälj
-              </BButton>
+              <RouterLink to="/sell">
+                <BButton variant="light"
+                  class="ms-2 text-uppercase fw-bold py-2 px-5">
+                  Sälj
+                </BButton>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -54,12 +56,17 @@ defineProps({
   background-position: center;
   background-size: cover;
   height: 400px;
-  width: 1300px;
+  width: 1250px;
   margin: auto;
   border-radius: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
   display: flex;
   align-items: center;
+}
+
+#bg
+{
+  color: #121212;
 }
 </style>

@@ -1,8 +1,8 @@
 <script setup>
-import ProductListing from './ProductListing.vue'
-import { defineProps, onMounted, reactive } from 'vue'
+import ProductCard from './ProductCard.vue'
+import { defineProps, onMounted, reactive, computed, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
-import { BSpinner } from 'bootstrap-vue-next'
+import { BSpinner, BPagination } from 'bootstrap-vue-next'
 import axios from 'axios'
 
 defineProps({
@@ -14,10 +14,22 @@ defineProps({
 })
 
 const api_url = 'https://67b27350bc0165def8cd952b.mockapi.io/api/products'
+const currentPage = ref(1)
+const perPage = 8
 
 const status = reactive({
   products: [],
   loading: true,
+})
+
+const pageCount = computed(() => {
+  return Math.ceil(status.products.length / perPage)
+})
+
+const paginatedProducts = computed(() => {
+  const startIndex = (currentPage.value - 1) * perPage
+  const endIndex = startIndex + perPage
+  return status.products.slice(startIndex, endIndex)
 })
 
 onMounted(async () => {
@@ -31,33 +43,46 @@ onMounted(async () => {
     status.loading = false;
   }
 })
+
+watch(currentPage, () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+})
+
 </script>
 
 <template>
-  <section class="bg-dark px-4 py-4 pb-5">
+  <section class="container px-4 pb-5">
     <div class="container-lg mx-auto">
       <h4 class="fw-bold text-light mb-4 text-center">
         Produkter
       </h4>
-      <div class="row g-3">
+      <div class="row g-2">
         <div v-if="status.loading" class="text-center">
           <b-spinner variant="light" label="loading..."></b-spinner>
         </div>
         <div class="col-md-3 d-flex flex-column h-100"
-          v-for="product in status.products.slice(0, limit || status.products.length)"
+          v-for="product in (limit ? status.products.slice(0, limit) : paginatedProducts)"
           :key="product.id">
-          <ProductListing :product="product" />
+          <ProductCard :product="product" />
         </div>
       </div>
     </div>
   </section>
 
-  <section class="bg-dark py-4 d-flex">
+  <section v-if="!limit && pageCount > 1"
+    class="d-flex justify-content-center mb-4">
+    <b-pagination v-model="currentPage" :total-rows="status.products.length"
+      :per-page="perPage" aria-controls="products-table" align="center"
+      class="pagination-custom"></b-pagination>
+  </section>
+
+  <section class="d-flex">
     <div v-if="showButton" class="mx-auto my-4 px-3">
-      <RouterLink to="/products"
-        class="text-dark text-center py-3 px-4 rounded text-decoration-none fw-bold"
-        id="show-all-button">
-        Visa alla produkter
+      <RouterLink to="/products">
+        <button class="btn btn-primary w-100">Visa alla produkter</button>
       </RouterLink>
     </div>
   </section>
@@ -72,5 +97,39 @@ onMounted(async () => {
 #show-all-button:hover
 {
   background: #d3d5d7;
+}
+
+.btn-primary
+{
+  background-color: #bb86fc;
+  border: none;
+  padding: 12px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+}
+
+.btn-primary:hover
+{
+  background-color: #9a67ea;
+}
+
+.pagination-custom :deep(.page-link)
+{
+  color: #bb86fc;
+  background-color: transparent;
+  border-color: #484848;
+}
+
+.pagination-custom :deep(.page-item.active .page-link)
+{
+  background-color: #bb86fc;
+  border-color: #bb86fc;
+  color: white;
+}
+
+.pagination-custom :deep(.page-link:hover)
+{
+  background-color: #9a67ea;
+  color: white;
 }
 </style>
