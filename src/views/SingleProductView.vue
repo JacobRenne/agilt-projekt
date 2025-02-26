@@ -55,10 +55,10 @@ function saveToWishList() {
       <div class="row">
         <main class="col-md-8">
           <div class="card mb-3 product-card">
-              <div class="d-flex justify-content-center my-3">
-                <img :src="status.product.bild" :alt="status.product.title"
-                  class="img-fluid">
-              </div>
+            <div class="d-flex justify-content-center my-3">
+              <img :src="status.product.bild" :alt="status.product.title"
+                class="img-fluid">
+            </div>
 
           </div>
         </main>
@@ -80,15 +80,14 @@ function saveToWishList() {
           </div>
           <div class="card product-card">
             <div class="card-body text-center">
-              <h3 class="text-white">{{ status.product.pris }} kr</h3>
-              <button class="btn btn-primary w-100" @click="addToCart">Köp</button>
-              <button
-                class="btn btn-danger btn-block ms-2"
-                @click="saveToWishList"
-              >
+              <h3 class="text-primary">{{ status.product.pris }} kr</h3>
+
+              <button class="btn btn-secondary w-100 mb-2 p-12"
+                @click="saveToWishList">
                 Add to wishlist
               </button>
-              
+              <button class="btn btn-primary w-100"
+                @click="addToCart">Köp</button>
             </div>
           </div>
         </aside>
@@ -155,11 +154,17 @@ function saveToWishList() {
   background: #413d46;
 }
 
-.img-fluid {
-  max-width: 450px;
-  object-fit: cover;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.btn-secondary
+{
+  background-color: #d73447;
+  border: none;
+  padding: 12px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+}
+
+.btn-secondary:hover
+{
+  background-color: #d0283b;
 }
 </style>
