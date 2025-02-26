@@ -84,12 +84,12 @@ const selectImage = (imageUrl) => {
 
 <template>
   <h4 class="fw-bold text-light mb-4 text-center">
-        Sälj grafikkort
-      </h4>
+    Sälj grafikkort
+  </h4>
   <section class="container text-white section-card pt-4">
     <form class="row g-3 small" @submit.prevent="handleSubmit">
       <div class="col-md-5">
-        <label class="form-label">Annonsens namn</label>
+        <label class="form-label">Annonsens namn:</label>
         <select v-model="form.title" id="title" name="title" class="form-select"
           required>
           <option value="ASUS ROG Strix GeForce RTX 3080">ASUS ROG Strix GeForce
@@ -115,7 +115,7 @@ const selectImage = (imageUrl) => {
         </select>
       </div>
       <div class="col-6 col-md-4">
-        <label for="artnr" class="form-label">Artikelnummer</label>
+        <label for="artnr" class="form-label">Artikelnummer:</label>
         <select v-model="form.artnr" id="artnr" name="artnr" class="form-select"
           required>
           <option value="RTX3080">RTX3080</option>
@@ -130,13 +130,13 @@ const selectImage = (imageUrl) => {
       </div>
 
       <div class="col-6 col-md-3">
-        <label for="pris" class="form-label">Pris</label>
+        <label for="pris" class="form-label">Pris:</label>
         <input type="number" v-model="form.pris" id="pris" name="pris"
           class="form-control" required />
       </div>
 
       <div class="col-12">
-        <label for="beskrivning" class="form-label">Välj beskrivning</label>
+        <label for="beskrivning" class="form-label">Välj beskrivning:</label>
         <select v-model="form.beskrivning" id="beskrivning" name="beskrivning"
           class="form-select" required>
           <option
@@ -187,17 +187,9 @@ const selectImage = (imageUrl) => {
           Laddar bilder...
         </div>
       </div>
-
-      <div class="col-12 col-12 d-flex justify-content-end">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck"
-            required>
-          <label class="form-check-label" for="gridCheck">
-            Accepterar villkor </label>
-        </div>
-      </div>
       <div class="col-12 d-flex justify-content-end mb-5">
-        <button type="submit" class="btn btn-primary">Skicka in</button>
+        <button type="submit" class="btn btn-primary py-2 px-5">Skicka
+          in</button>
       </div>
     </form>
   </section>
@@ -227,8 +219,7 @@ h2
 
 .btn
 {
-  padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
+
   background-color: #bb86fc;
 }
 
@@ -286,5 +277,4 @@ h2
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   border: none;
 }
-
 </style>

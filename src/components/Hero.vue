@@ -28,14 +28,12 @@ defineProps({
                 {{ subtitle }}
               </h5>
               <RouterLink to="/products">
-                <BButton variant="dark"
-                  class="me-2 text-uppercase fw-bold py-2 px-5">
+                <BButton variant="dark" class="me-2 py-2 px-5">
                   Köp
                 </BButton>
               </RouterLink>
               <RouterLink to="/sell">
-                <BButton variant="light"
-                  class="ms-2 text-uppercase fw-bold py-2 px-5">
+                <BButton variant="light" class="ms-2 py-2 px-5">
                   Sälj
                 </BButton>
               </RouterLink>

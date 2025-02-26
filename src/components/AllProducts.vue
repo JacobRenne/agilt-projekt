@@ -80,9 +80,10 @@ watch(currentPage, () => {
   </section>
 
   <section class="d-flex">
-    <div v-if="showButton" class="mx-auto my-4 px-3">
+    <div v-if="showButton" class="mx-auto">
       <RouterLink to="/products">
-        <button class="btn btn-primary w-100">Visa alla produkter</button>
+        <button class="btn btn-primary w-100 py-2 px-5">Visa alla
+          produkter</button>
       </RouterLink>
     </div>
   </section>
@@ -102,10 +103,7 @@ watch(currentPage, () => {
 .btn-primary
 {
   background-color: #bb86fc;
-  border: none;
-  padding: 12px;
-  font-size: 1.1rem;
-  border-radius: 8px;
+
 }
 
 .btn-primary:hover

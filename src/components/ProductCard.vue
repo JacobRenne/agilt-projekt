@@ -13,21 +13,15 @@ const props = defineProps({
 <template>
     <div class="rounded shadow-md position-relative product-card">
         <div class="p-3 d-flex flex-column">
-            <div class="text-grey my-1">Artikelnr: {{ product.artnr }}</div>
-            <h3 class="fs-6 fw-bold text-white title">{{ product.title }}</h3>
             <RouterLink :to="'products/' + product.id">
-                <div class="row mb-2">
-                    <div class="col-12">
-                        <img :src="product.bild" :alt="product.title"
-                          class="img-fluid rounded">
-                    </div>
+                <div class="col-12">
+                    <img :src="product.bild" :alt="product.title"
+                      class="img-fluid rounded">
                 </div>
             </RouterLink>
-            <div class="mb-3 text-light description-container">
-                {{ product.beskrivning }}
-            </div>
-            <div class="border border-light mb-2"></div>
-            <div class="d-flex justify-content-end">
+            <h3 class="fs-6 fw-bold text-white text-center text-truncate">{{
+                product.title }}</h3>
+            <div class="d-flex justify-content-end mt-2">
                 <div class="text-primary fw-bold">{{ product.pris }} kr</div>
             </div>
         </div>
@@ -47,17 +41,10 @@ const props = defineProps({
     height: 100%;
 }
 
-.title
-{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .img-fluid
 {
     width: 100%;
-    height: 150px;
+    height: 110px;
     border-radius: 8px;
     object-fit: contain;
 }
@@ -89,13 +76,5 @@ const props = defineProps({
 .text-light
 {
     color: #b0b0b0 !important;
-}
-
-.description-container
-{
-    height: 3rem;
-    line-clamp: 2;
-    box-orient: vertical;
-    overflow: hidden;
 }
 </style>
