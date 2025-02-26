@@ -26,7 +26,13 @@ function sendToOrders() {
   }
 
   cartItems.value.forEach((item) => {
-    currentOrders.push(item)
+    currentOrders.push({
+      id: item.id, 
+      bild: item.bild,
+      pris: item.pris,
+      title: item.title,
+      orderStatus: "Levereras"
+    })
   })
 
   localStorage.setItem('orders', JSON.stringify(currentOrders))

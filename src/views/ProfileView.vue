@@ -14,6 +14,12 @@ const user = ref(
 );
 
 const orders = ref(JSON.parse(localStorage.getItem('orders') || '[]' ))
+function cancelOrder(id) {
+  const orderToCancel = orders.value.find((item) => item.id === id)
+  orderToCancel.orderStatus = "Avbruten"
+  localStorage.setItem('orders', JSON.stringify(orders.value))
+}
+
 
 onMounted(() => {
   localStorage.setItem("user", JSON.stringify(user.value));
@@ -114,6 +120,7 @@ const saveUserInfo = () => {
                   <th>Produkt</th>
                   <th>Pris</th>
                   <th>Orderstatus</th>
+                  <th>Avbeställ</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider">
@@ -128,7 +135,10 @@ const saveUserInfo = () => {
                     <p class="m-0">{{ item.pris }}</p>
                   </td>
                   <td class="align-middle border-0">
-                    <p class="m-0">Levereras</p>
+                    <p class="m-0">{{ item.orderStatus }}</p>
+                  </td>
+                  <td class="align-middle border-0" >
+                    <button class="btn btn-danger" @click="cancelOrder(item.id)" v-if="item.orderStatus === 'Levereras'">Avbeställ</button>
                   </td>
                 </tr>
               </tbody>
