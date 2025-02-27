@@ -65,8 +65,8 @@ function removeFromCart(id) {
           <tr v-for="item in cartItems" :key="item.id" class="">
             <td class="d-flex align-items-center gap-2 border-0">
               <img :src="item.bild" :alt="item.title" class="image-thumbnail d-none d-sm-block" style="width: 90px;">
-              <RouterLink :to="'products/' + item.id" class="text-white text-decoration-none">
-                <p class="m-0">{{ item.title }}</p>
+              <RouterLink :to="'products/' + item.id" class="text-white text-decoration-none align-self-middle" st>
+                <p class="m-0 align-items" style="line-height: 63px;">{{ item.title }}</p>
               </RouterLink>
             </td>
             <td class="align-middle border-0">

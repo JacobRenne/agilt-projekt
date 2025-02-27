@@ -14,9 +14,9 @@ const user = ref(
 );
 
 const orders = ref(JSON.parse(localStorage.getItem('orders') || '[]' ))
-function cancelOrder(id) {
-  const orderToCancel = orders.value.find((item) => item.id === id)
-  orderToCancel.orderStatus = "Avbruten"
+
+function cancelOrder(index) {
+  orders.value[index].orderStatus = "Avbruten"
   localStorage.setItem('orders', JSON.stringify(orders.value))
 }
 
@@ -124,7 +124,7 @@ const saveUserInfo = () => {
                 </tr>
               </thead>
               <tbody class="table-group-divider">
-                <tr v-for="item in orders" :key="item.id" class="">
+                <tr v-for="(item, index) in orders" :key="item.id" class="">
                   <td class="d-flex align-items-center gap-2 border-0">
                     <img :src="item.bild" :alt="item.title" class="image-thumbnail d-none d-sm-block" style="width: 90px;">
                     <RouterLink :to="'products/' + item.id" class="text-white text-decoration-none">
@@ -138,7 +138,9 @@ const saveUserInfo = () => {
                     <p class="m-0">{{ item.orderStatus }}</p>
                   </td>
                   <td class="align-middle border-0" >
-                    <button class="btn btn-danger" @click="cancelOrder(item.id)" v-if="item.orderStatus === 'Levereras'">Avbeställ</button>
+                    <button class="btn btn-danger" @click="cancelOrder(index)" v-if="item.orderStatus === 'Levereras'">
+                      Avbeställ
+                    </button>
                   </td>
                 </tr>
               </tbody>
