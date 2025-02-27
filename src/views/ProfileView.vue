@@ -108,7 +108,8 @@ const saveUserInfo = () => {
               placeholder="Sök efter produktnamn eller ordernummer" />
           </div>
           <div v-if="orders.length > 0">
-            <table class="table table-dark m-0 rounded-3 overflow-hidden">
+            <table class="table table-dark m-0 rounded-3 overflow-hidden"
+              id="table-hover">
               <thead>
                 <tr>
                   <th>Produkt</th>
@@ -129,7 +130,7 @@ const saveUserInfo = () => {
                     </RouterLink>
                   </td>
                   <td class="align-middle border-0">
-                    <p class="m-0">{{ item.pris }}</p>
+                    <p class="m-0 text-info fw-bold">{{ item.pris }} kr</p>
                   </td>
                   <td class="align-middle border-0">
                     <p class="m-0">{{ item.orderStatus }}</p>
@@ -177,7 +178,8 @@ const saveUserInfo = () => {
                 placeholder="Bekräfta nytt lösenord" />
             </BFormGroup>
             <div class="text-center text-md-end">
-              <BButton variant="primary" @click="saveUserInfo">Spara</BButton>
+              <button class="btn btn-primary"
+                @click="saveUserInfo">Spara</button>
             </div>
           </div>
         </div>
@@ -198,6 +200,21 @@ const saveUserInfo = () => {
 </template>
 
 <style scoped>
+.btn-primary
+{
+  background-color: #bb81f8;
+}
+
+.btn-primary:hover
+{
+  background-color: #9a67ea;
+}
+
+.text-info
+{
+  color: #bb81f8 !important;
+}
+
 .profile-settings
 {
   display: block;

@@ -86,7 +86,7 @@ function saveToWishList() {
           </div>
           <div class="card product-card">
             <div class="card-body text-center">
-              <h3 class="text-info">{{ status.product.pris }} kr</h3>
+              <h3 class="text-primary">{{ status.product.pris }} kr</h3>
 
               <button class="btn btn-danger w-100 mb-2 p-12"
                 @click="saveToWishList">
@@ -138,10 +138,21 @@ function saveToWishList() {
 
 .btn-primary
 {
+  background: #bb81f8;
   border: none;
   padding: 12px;
   font-size: 1.1rem;
   border-radius: 8px;
+}
+
+.text-primary
+{
+  color: #bb81f8 !important;
+}
+
+.btn-primary:hover
+{
+  background: #975dd6;
 }
 
 #bg

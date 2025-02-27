@@ -22,7 +22,7 @@ const props = defineProps({
             <h3 class="fs-6 fw-bold text-white text-center text-truncate">{{
                 product.title }}</h3>
             <div class="d-flex justify-content-end mt-2">
-                <div class="text-info fw-bold">{{ product.pris }} kr</div>
+                <div class="text-primary fw-bold">{{ product.pris }} kr</div>
             </div>
         </div>
     </div>
@@ -56,7 +56,7 @@ const props = defineProps({
 
 .btn-primary
 {
-    background-color: #bb86fc;
+    background-color: #bb81f8;
     border: none;
     padding: 12px;
     font-size: 1.1rem;
@@ -71,5 +71,10 @@ const props = defineProps({
 .text-light
 {
     color: #b0b0b0 !important;
+}
+
+.text-primary
+{
+    color: #bb81f8 !important;
 }
 </style>

@@ -103,26 +103,36 @@ watch(currentPage, () => {
 
 .pagination-custom :deep(.page-link)
 {
-  color: #0d6efd;
+  color: #bb81f8;
   background-color: transparent;
   border-color: #484848;
 }
 
 .pagination-custom :deep(.page-item.active .page-link)
 {
-  background-color: #0d6efd;
+  background-color: #bb81f8;
   border-color: #0065fc;
   color: white;
 }
 
 .pagination-custom :deep(.page-link:hover)
 {
-  background-color: #bb86fc;
+  background-color: #9a67ea;
   color: white;
 }
 
 #section
 {
   width: 1300px;
+}
+
+.btn-primary
+{
+  background-color: #bb81f8;
+}
+
+.btn-primary:hover
+{
+  background-color: #9a67ea;
 }
 </style>

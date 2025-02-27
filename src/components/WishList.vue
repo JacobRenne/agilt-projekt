@@ -33,13 +33,21 @@ function removeFromWishList(product) {
           </RouterLink>
         </td>
         <td class="align-middle border-0">
-          <p class="m-0">{{ product.pris }} kr</p>
+          <p class="m-0 text-info fw-bold">{{ product.pris }} kr</p>
         </td>
         <td class="align-middle border-0">
-          <button class="btn btn-danger " @click="removeFromWishList(product)">Ta
-            bort från önskelistan</button>
+          <button class="btn btn-danger "
+            @click="removeFromWishList(product)">Ta
+            bort</button>
         </td>
       </tr>
     </tbody>
   </table>
 </template>
+
+<style scoped>
+.text-info
+{
+  color: #bb81f8 !important;
+}
+</style>

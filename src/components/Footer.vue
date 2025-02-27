@@ -53,9 +53,14 @@
 </template>
 
 <style scoped>
+.text-info
+{
+  color: #bb81f8 !important;
+}
+
 .gradient-text
 {
-  background: linear-gradient(90deg, #bb86fc, #03dac6);
+  background: linear-gradient(90deg, #bb81f8, #4d1ab3);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -70,7 +75,7 @@
 
 .footer-link:hover
 {
-  color: #bb86fc !important;
+  color: #bb81f8 !important;
   transform: translateX(5px);
 }
 </style>
