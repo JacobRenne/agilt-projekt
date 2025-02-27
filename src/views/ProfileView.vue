@@ -108,8 +108,7 @@ const saveUserInfo = () => {
               placeholder="Sök efter produktnamn eller ordernummer" />
           </div>
           <div v-if="orders.length > 0">
-            <table class="table table-dark m-0 rounded-3 overflow-hidden"
-              id="table-hover">
+            <table class="table table-dark m-0 rounded-3 overflow-hidden">
               <thead>
                 <tr>
                   <th>Produkt</th>

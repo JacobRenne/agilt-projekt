@@ -54,7 +54,7 @@ function removeFromCart(id) {
 
 <template>
   <div
-    class="container p-4 mt-3 rounded shadow-sm d-flex flex-column text-white align-items-center mb-5">
+    class="container py-4 px-0 mt-3 rounded shadow-sm d-flex flex-column text-white align-items-center mb-5">
     <h4 class="mb-4">Din varukorg</h4>
     <div v-if="cartItems.length > 0" class="d-flex gap-2 flex-wrap">
       <table class="table table-dark mb-4 rounded-3 overflow-hidden">
