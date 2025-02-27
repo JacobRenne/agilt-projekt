@@ -1,6 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { ref, onMounted, onUnmounted } from 'vue';
+import Search from './Search.vue';
 
 const route = useRoute();
 const showMobileSearch = ref(false);
@@ -31,13 +32,10 @@ onUnmounted(() => {
         <span class="gradient-text fs-3 fw-bold">Grafikbanken .</span>
       </RouterLink>
 
-      <form class="search-form d-none d-md-flex mx-auto" role="search"
+      <div class="search-form d-none d-md-flex mx-auto"
         v-if="route.meta.showSearch">
-        <input class="form-control me-3" type="search"
-          placeholder="Sök efter produkter" aria-label="Search">
-        <button class="btn btn-outline-primary" type="submit"><i
-            class="bi bi-search text-white"></i></button>
-      </form>
+        <Search />
+      </div>
 
       <div class="d-flex flex-row gap-3 align-items-center">
         <button v-if="route.meta.showSearch"
@@ -57,11 +55,9 @@ onUnmounted(() => {
 
     <div v-if="showMobileSearch && route.meta.showSearch"
       class="mobile-search-container">
-      <form class="d-flex w-100 px-3 py-2" role="search">
-        <input class="form-control me-2" type="search"
-          placeholder="Sök efter produkter" aria-label="Search">
-        <button class="btn btn-primary" type="submit">Sök</button>
-      </form>
+      <div class="d-flex w-100 px-3 py-2">
+        <Search />
+      </div>
     </div>
   </nav>
 </template>
@@ -69,7 +65,6 @@ onUnmounted(() => {
 <style scoped>
 .navbar
 {
-  background-color: #121212;
   flex-direction: column;
 }
 
@@ -90,15 +85,9 @@ onUnmounted(() => {
   flex: 1;
 }
 
-.search-form input
-{
-  flex: 1;
-}
-
 .mobile-search-container
 {
   width: 100%;
-  background-color: #1a1a1a;
 }
 
 @media (max-width: 1300px)
@@ -111,12 +100,12 @@ onUnmounted(() => {
 
 i
 {
-  color: #2e67f8;
+  color: #bb81f8;
 }
 
 .gradient-text
 {
-  background: linear-gradient(90deg, #2e67f8, #bb86fc);
+  background: linear-gradient(90deg, #bb81f8, #4d1ab3);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -124,14 +113,9 @@ i
   letter-spacing: 1px;
 }
 
-form[role="search"] input
-{
-  flex: 1;
-}
-
 @media (max-width: 768px)
 {
-  .search-form input
+  .search-form
   {
     flex: 1;
   }

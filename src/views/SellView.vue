@@ -197,6 +197,16 @@ const selectImage = (imageUrl) => {
 </template>
 
 <style scoped>
+.btn-primary
+{
+  background-color: #bb81f8;
+}
+
+.btn-primary:hover
+{
+  background-color: #9a67ea;
+}
+
 .small
 {
   font-size: 1rem;
@@ -253,9 +263,9 @@ h2
 
 .image-option.selected
 {
-  border: 3px solid #bb86fc;
-  box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
-  background: #0d6efd;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background: #bb81f8;
 }
 
 .image-option img

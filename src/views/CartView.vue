@@ -74,7 +74,7 @@ function removeFromCart(id) {
               </RouterLink>
             </td>
             <td class="align-middle border-0">
-              <p class="m-0">{{ item.pris }}</p>
+              <p class="m-0 fw-bold text-info">{{ item.pris }} kr</p>
             </td>
             <td class="align-middle border-0">
               <button class="btn btn-danger" @click="removeFromCart(item.id)">Ta
@@ -83,7 +83,7 @@ function removeFromCart(id) {
           </tr>
         </tbody>
       </table>
-      <h4>Totalt pris: {{ totalPrice }} kr</h4>
+      <h4>Totalt pris: <span class="text-info">{{ totalPrice }} kr</span></h4>
       <div class="col-12 d-flex justify-content-end">
         <button
           class="btn btn-primary py-2 px-5 mt-2 col-2 d-flex justify-content-center"
@@ -102,5 +102,20 @@ function removeFromCart(id) {
 .table
 {
   background-color: rgb(51, 51, 51);
+}
+
+.text-info
+{
+  color: #bb81f8 !important;
+}
+
+.btn-primary
+{
+  background-color: #bb81f8;
+}
+
+.btn-primary:hover
+{
+  background-color: #9a67ea;
 }
 </style>

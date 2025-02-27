@@ -36,14 +36,9 @@ import { RouterLink } from 'vue-router';
   padding: 10px;
 }
 
-.nav-link
-{
-  transition: background-color 0.3s ease;
-}
-
 .nav-link:hover
 {
-  background-color: #0d6efd;
+  background-color: #bb81f8;
   border-radius: 6px;
 }
 

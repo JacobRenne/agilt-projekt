@@ -9,7 +9,8 @@ import SmallNavBar from "./components/SmallNavBar.vue";
   <NavBar />
   <SmallNavBar />
   <div class="content">
-    <RouterView />
+    <!-- tvinga vue att omrenderar även om (id) ändras. för search.vue -->
+    <RouterView :key="$route.fullPath" />
   </div>
   <Footer />
 </template>
