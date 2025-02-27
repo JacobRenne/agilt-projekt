@@ -1,8 +1,13 @@
 <script setup>
-
 import { reactive, onMounted, ref } from "vue";
 import { useRoute, RouterLink, useRouter } from "vue-router";
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 import axios from "axios";
+
+const toast = useToast({
+  position: 'top-right'
+})
 
 const route = useRoute();
 const productId = route.params.id;
@@ -36,7 +41,7 @@ function addToCart() {
   })
 
   localStorage.setItem('cart', JSON.stringify(cart))
-  alert(`${status.product.title} har lagts till i varukorgen!`)
+  toast.success('Produkt har lagts till')
 
 }
 
@@ -46,6 +51,7 @@ function saveToWishList() {
     wishList.push(status.product);
     sessionStorage.setItem("wishList", JSON.stringify(wishList));
   }
+  toast.success('Finns på önskelistan')
 }
 </script>
 
@@ -80,14 +86,14 @@ function saveToWishList() {
           </div>
           <div class="card product-card">
             <div class="card-body text-center">
-              <h3 class="text-primary">{{ status.product.pris }} kr</h3>
+              <h3 class="text-info">{{ status.product.pris }} kr</h3>
 
-              <button class="btn btn-secondary w-100 mb-2 p-12"
+              <button class="btn btn-danger w-100 mb-2 p-12"
                 @click="saveToWishList">
-                Add to wishlist
+                <i class="bi bi-heart-fill"></i> Önskelista
               </button>
-              <button class="btn btn-primary w-100"
-                @click="addToCart">Köp</button>
+              <button class="btn btn-primary w-100" @click="addToCart"><i
+                  class="bi bi-bag"></i> Köp</button>
             </div>
           </div>
         </aside>
@@ -120,11 +126,6 @@ function saveToWishList() {
   object-fit: contain;
 }
 
-.text-primary
-{
-  color: #bb86fc !important;
-}
-
 .text-light
 {
   color: #b0b0b0 !important;
@@ -137,16 +138,10 @@ function saveToWishList() {
 
 .btn-primary
 {
-  background-color: #bb86fc;
   border: none;
   padding: 12px;
   font-size: 1.1rem;
   border-radius: 8px;
-}
-
-.btn-primary:hover
-{
-  background-color: #9a67ea;
 }
 
 #bg
@@ -154,17 +149,11 @@ function saveToWishList() {
   background: #413d46;
 }
 
-.btn-secondary
+.btn-danger
 {
-  background-color: #d73447;
   border: none;
   padding: 12px;
   font-size: 1.1rem;
   border-radius: 8px;
-}
-
-.btn-secondary:hover
-{
-  background-color: #d0283b;
 }
 </style>

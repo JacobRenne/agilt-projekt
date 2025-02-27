@@ -86,7 +86,7 @@ const selectImage = (imageUrl) => {
   <h4 class="fw-bold text-light mb-4 text-center">
     Sälj grafikkort
   </h4>
-  <section class="container text-white section-card pt-4">
+  <section class="container text-white section-card pt-4 mb-5">
     <form class="row g-3 small" @submit.prevent="handleSubmit">
       <div class="col-md-5">
         <label class="form-label">Annonsens namn:</label>
@@ -175,8 +175,9 @@ const selectImage = (imageUrl) => {
       </div>
 
       <label class="form-label">Välj bild på grafikkort:</label>
-      <div class="col-12 mt-2 me-4 ms-4">
-        <div class="d-flex flex-wrap gap-1 image-gallery mt-2">
+      <div class="col-12 mt-2">
+        <div
+          class="d-flex flex-wrap gap-1 image-gallery mt-2 justify-content-center">
           <div v-for="image in images" :key="image" class="image-option"
             :class="{ 'selected': form.bild === image }"
             @click="selectImage(image)">
@@ -188,7 +189,7 @@ const selectImage = (imageUrl) => {
         </div>
       </div>
       <div class="col-12 d-flex justify-content-end mb-5">
-        <button type="submit" class="btn btn-primary py-2 px-5">Skicka
+        <button type="submit" class="btn btn-primary py-2 px-5 mt-2">Skicka
           in</button>
       </div>
     </form>
@@ -198,7 +199,12 @@ const selectImage = (imageUrl) => {
 <style scoped>
 .small
 {
-  font-size: 0.875rem;
+  font-size: 1rem;
+  width: 1000px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
 
 .form-control,
@@ -207,20 +213,9 @@ const selectImage = (imageUrl) => {
   padding: 0.25rem 0.5rem;
 }
 
-.container
-{
-  max-width: 900px;
-}
-
 h2
 {
   font-size: 1.5rem;
-}
-
-.btn
-{
-
-  background-color: #bb86fc;
 }
 
 #bg
@@ -240,7 +235,7 @@ h2
   width: 100px;
   height: 100px;
   border: 2px solid #ccc;
-  border-radius: 5px;
+  border-radius: 6px;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.2s;
@@ -260,7 +255,7 @@ h2
 {
   border: 3px solid #bb86fc;
   box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
-  background: gray;
+  background: #0d6efd;
 }
 
 .image-option img

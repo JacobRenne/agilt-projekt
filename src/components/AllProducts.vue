@@ -82,7 +82,7 @@ watch(currentPage, () => {
   <section class="d-flex">
     <div v-if="showButton" class="mx-auto">
       <RouterLink to="/products">
-        <button class="btn btn-primary w-100 py-2 px-5">Visa alla
+        <button class="btn btn-primary w-100 py-2 px-5 mb-5">Visa alla
           produkter</button>
       </RouterLink>
     </div>
@@ -100,34 +100,29 @@ watch(currentPage, () => {
   background: #d3d5d7;
 }
 
-.btn-primary
-{
-  background-color: #bb86fc;
-
-}
-
-.btn-primary:hover
-{
-  background-color: #9a67ea;
-}
 
 .pagination-custom :deep(.page-link)
 {
-  color: #bb86fc;
+  color: #0d6efd;
   background-color: transparent;
   border-color: #484848;
 }
 
 .pagination-custom :deep(.page-item.active .page-link)
 {
-  background-color: #bb86fc;
-  border-color: #bb86fc;
+  background-color: #0d6efd;
+  border-color: #0065fc;
   color: white;
 }
 
 .pagination-custom :deep(.page-link:hover)
 {
-  background-color: #9a67ea;
+  background-color: #bb86fc;
   color: white;
+}
+
+#section
+{
+  width: 1300px;
 }
 </style>

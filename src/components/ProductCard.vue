@@ -22,7 +22,7 @@ const props = defineProps({
             <h3 class="fs-6 fw-bold text-white text-center text-truncate">{{
                 product.title }}</h3>
             <div class="d-flex justify-content-end mt-2">
-                <div class="text-primary fw-bold">{{ product.pris }} kr</div>
+                <div class="text-info fw-bold">{{ product.pris }} kr</div>
             </div>
         </div>
     </div>
@@ -47,11 +47,6 @@ const props = defineProps({
     height: 110px;
     border-radius: 8px;
     object-fit: contain;
-}
-
-.text-primary
-{
-    color: #bb86fc !important;
 }
 
 .text-grey

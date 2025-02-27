@@ -8,18 +8,19 @@ import SmallNavBar from "./components/SmallNavBar.vue";
 <template>
   <NavBar />
   <SmallNavBar />
-  <div class="d-flex flex-column min-vh-100">
-    <div class="flex-grow-1" id="bg">
-      <RouterView />
-    </div>
+  <div class="content">
+    <RouterView />
   </div>
   <Footer />
 </template>
 
 <style>
+html,
 body
 {
-  font-family: "Roboto", sans-serif;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 #bg
@@ -27,5 +28,20 @@ body
   background: #121212;
   color: #ffffff;
   padding: 2rem 0;
+}
+
+#app
+{
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+  background: #121212;
+}
+
+.content
+{
+  flex-grow: 1;
+  margin-top: 20px;
 }
 </style>
