@@ -1,7 +1,9 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
 
 const cartItems = ref([])
+const router = useRouter()
 
 onMounted(() => {
   let cart = []
@@ -23,6 +25,7 @@ function sendToOrders() {
   let currentOrders = []
   if (JSON.parse(localStorage.getItem('orders'))) {
     currentOrders = JSON.parse(localStorage.getItem('orders'))
+    router.push('/thanks')
   }
 
   cartItems.value.forEach((item) => {
