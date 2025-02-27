@@ -22,10 +22,13 @@ function removeFromWishList(product) {
       </tr>
     </thead>
     <tbody class="table-group-divider">
-      <tr v-for="product in wishList" :key="product.id" class="rounded shadow-md position-relative mb-3" id="bg">
+      <tr v-for="product in wishList" :key="product.id"
+        class="rounded shadow-md position-relative mb-4 bg-dark">
         <td class="d-flex align-items-center gap-2 border-0">
-          <img :src="product.bild" :alt="product.title" class="image-thumbnail d-none d-sm-block" style="width: 90px" />
-          <RouterLink :to="'products/' + product.id" class="text-white text-decoration-none">
+          <img :src="product.bild" :alt="product.title"
+            class="image-thumbnail d-none d-sm-block" style="width: 90px" />
+          <RouterLink :to="'products/' + product.id"
+            class="text-white text-decoration-none">
             <p class="m-0">{{ product.title }}</p>
           </RouterLink>
         </td>
@@ -33,7 +36,8 @@ function removeFromWishList(product) {
           <p class="m-0">{{ product.pris }} kr</p>
         </td>
         <td class="align-middle border-0">
-          <button class="btn btn-danger" @click="removeFromWishList(product)">Ta bort från önskelistan</button>
+          <button class="btn btn-danger " @click="removeFromWishList(product)">Ta
+            bort från önskelistan</button>
         </td>
       </tr>
     </tbody>
