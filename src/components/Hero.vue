@@ -15,7 +15,7 @@ defineProps({
 </script>
 
 <template>
-  <section class="pt-2" id="bg">
+  <section class="pt-0" id="bg">
     <div class="d-flex align-items-center text-center">
       <div id="hero">
         <div class="container">
@@ -28,14 +28,13 @@ defineProps({
                 {{ subtitle }}
               </h5>
               <RouterLink to="/products">
-                <BButton variant="dark" class="me-2 py-2 px-5">
-                  Köp
-                </BButton>
+                <Button class="me-2 py-2 px-5 btn btn-primary">
+                  <i class="bi bi-bag-fill"></i> Köp
+                </Button>
               </RouterLink>
               <RouterLink to="/sell">
-                <BButton variant="light" class="ms-2 py-2 px-5">
-                  Sälj
-                </BButton>
+                <Button class="ms-2 py-2 px-5 btn btn-secondary">Sälj
+                </Button>
               </RouterLink>
             </div>
           </div>
@@ -54,7 +53,7 @@ defineProps({
   background-position: center;
   background-size: cover;
   height: 400px;
-  width: 1250px;
+  width: 1300px;
   margin: auto;
   border-radius: 10px;
   padding-top: 10px;
