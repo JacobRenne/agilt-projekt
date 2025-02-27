@@ -125,7 +125,7 @@ const saveUserInfo = () => {
                     </RouterLink>
                   </td>
                   <td class="align-middle border-0">
-                    <p class="m-0">{{ item.pris }}</p>
+                    <p class="m-0">{{ item.pris }} kr</p>
                   </td>
                   <td class="align-middle border-0">
                     <p class="m-0">{{ item.orderStatus }}</p>
