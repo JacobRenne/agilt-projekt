@@ -5,7 +5,7 @@
 
         <div class="col-lg-6 mb-4 mb-lg-0">
           <router-link to="/" class="footer-logo text-decoration-none">
-            <span class="gradient-text fs-1 fw-bold">Grafikbanken</span>
+            <span class="gradient-text fs-1 fw-bold">Grafikbanken .</span>
           </router-link>
           <p class="text-white-50 mt-2">Billigare än nytt, bättre än begagnat.
           </p>

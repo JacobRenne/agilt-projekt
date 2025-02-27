@@ -5,6 +5,7 @@ import CartView from '../views/CartView.vue'
 import ProductsView from '../views/ProductsView.vue'
 import SellView from '../views/SellView.vue'
 import SingleProductView from '../views/SingleProductView.vue'
+import ThanksView from '../views/ThanksView.vue'
 
 
 const routes = [
@@ -14,6 +15,7 @@ const routes = [
   { path: '/products', name: 'Products', component: ProductsView, meta: { showSearch: true } },
   { path: '/sell', name: 'Sell', component: SellView, meta: { showSearch: true } },
   { path: '/products/:id', name: 'Product', component: SingleProductView, meta: { showSearch: true } },
+  { path: '/thanks', name: 'Thanks', component: ThanksView, meta: { showSearch: true } },
 ]
 
 const router = createRouter({

@@ -6,7 +6,7 @@ import { RouterLink } from 'vue-router';
   <nav class="navbar navbar-dark navbar-expand-lg">
     <div class="container-lg d-flex align-items-center justify-content-center">
       <div
-        class="navbar-nav d-flex justify-content-center align-items-center mx-auto"
+        class="navbar-nav d-flex justify-content-center align-items-center mx-auto gap-5"
         style="max-width: 1300px; width: 100%;">
         <RouterLink to="/" class="nav-link text-white fw-semibold p-2 px-3">
           <i class="bi bi-house-door-fill"></i> Hem
