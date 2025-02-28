@@ -97,16 +97,22 @@ const saveUserInfo = () => {
 </script>
 
 <template>
-  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
+  <div class="modal fade" id="confirmModal" tabindex="-1"
+    aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark ">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="confirmModalLabel">Är du säker att du vill avbryta denna beställning?</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h1 class="modal-title fs-6 text-white m-auto" id="confirmModalLabel">
+            Är du säker att du
+            vill avbryta denna beställning?</h1>
+          <button type="button" class="btn-close bg-light"
+            data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-footer d-flex justify-content-center">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="cancelOrder">Ja</button>
-          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Nej</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+            @click="cancelOrder">Ja</button>
+          <button type="button" class="btn btn-danger"
+            data-bs-dismiss="modal">Nej</button>
         </div>
       </div>
     </div>
@@ -269,5 +275,19 @@ const saveUserInfo = () => {
   {
     overflow-x: auto;
   }
+}
+
+.modal-dialog-centered
+{
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 1rem);
+}
+
+.modal-dialog-centered::before
+{
+  display: block;
+  height: calc(100vh - 1rem);
+  content: "";
 }
 </style>
