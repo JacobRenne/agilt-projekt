@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 import WishList from "../components/WishList.vue";
+import { Modal } from "bootstrap";
 
 const user = ref(
   JSON.parse(localStorage.getItem("user")) || {
@@ -14,9 +15,16 @@ const user = ref(
 );
 
 const orders = ref(JSON.parse(localStorage.getItem("orders") || "[]"));
+let selectedOrder = ref()
 
-function cancelOrder(index) {
-  orders.value[index].orderStatus = "Avbruten";
+function confirmCancel(index) {
+  selectedOrder.value = index
+  let modal = new Modal(document.getElementById('confirmModal'))
+  modal.show()
+}
+
+function cancelOrder() {
+  orders.value[selectedOrder.value].orderStatus = "Avbruten";
   localStorage.setItem("orders", JSON.stringify(orders.value));
 }
 
@@ -89,6 +97,20 @@ const saveUserInfo = () => {
 </script>
 
 <template>
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="confirmModalLabel">Är du säker att du vill avbryta denna beställning?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="cancelOrder">Ja</button>
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Nej</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <section>
     <div class="container p-4 mt-3 rounded shadow-sm mb-5"
       style="background-color: #333333">
@@ -135,7 +157,7 @@ const saveUserInfo = () => {
                     <p class="m-0">{{ item.orderStatus }}</p>
                   </td>
                   <td class="align-middle border-0">
-                    <button class="btn btn-danger" @click="cancelOrder(index)"
+                    <button class="btn btn-danger" @click="confirmCancel(index)"
                       v-if="item.orderStatus === 'Levereras'">
                       Avbeställ
                     </button>

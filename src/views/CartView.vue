@@ -90,7 +90,7 @@ function removeFromCart(id) {
       <div class="col-12 d-flex justify-content-end">
         <button
           class="btn btn-primary py-2 px-5 mt-2 col-2 d-flex justify-content-center"
-          @click="sendToOrders">Köp</button>
+          @click="sendToOrders">Slutför köp</button>
       </div>
     </div>
     <div v-else>
