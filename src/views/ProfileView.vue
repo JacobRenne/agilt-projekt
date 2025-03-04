@@ -159,11 +159,13 @@ watch(selected, (newValue) => {
           <BFormRadioGroup v-model="selected" :options="options"
             name="radios-btn-group1" size="lg" buttons stacked />
           <div class="mt-auto">
-            <button class="btn btn-danger mt-3" @click="handleLogout">Logga
+            <button class="btn btn-danger mt-3 p-md-2"
+              @click="handleLogout">Logga
               ut</button>
           </div>
         </div>
-        <div v-if="showOrders" class="col-md-9 text-light content-section">
+        <div v-if="showOrders"
+          class="col-md-9 text-light m-lg-0 m-sm-auto content-section">
           <h1 class="h4 mb-3 text-center text-md-start">Mina ordrar</h1>
           <p class="text-center text-md-start">Här hittar du samtliga
             beställningar.</p>
