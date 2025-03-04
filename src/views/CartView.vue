@@ -64,9 +64,10 @@ function removeAllCartItems() {
 </script>
 
 <template>
-  <div class="container py-4 px-0 mt-3 rounded shadow-sm d-flex flex-column text-white align-items-center mb-5">
+  <div
+    class="container py-4 px-0 mt-3 rounded shadow-sm d-flex flex-column text-white align-items-center mb-5">
     <h4 class="mb-4">Din varukorg</h4>
-    
+
     <div v-if="cartItems.length > 0" class="d-flex gap-2 flex-wrap">
       <table class="table table-dark mb-4 rounded-3 overflow-hidden">
         <thead class="">
@@ -91,21 +92,21 @@ function removeAllCartItems() {
               <p class="m-0 fw-bold text-info">{{ item.pris }} kr</p>
             </td>
             <td class="align-middle border-0">
-              <button class="btn btn-danger" @click="removeFromCart(index)">Ta
+              <button
+                class="btn btn-danger border-0"
+                @click="removeFromCart(index)">Ta
                 bort</button>
             </td>
           </tr>
         </tbody>
       </table>
       <h4>Totalt pris: <span class="text-info">{{ totalPrice }} kr</span></h4>
-      <div class="col-12 d-flex justify-content-start gap-3 flex-wrap">
-        <button
-          class="btn btn-primary py-3 px-6 mt-2 col-2 d-flex justify-content-center border-0"
-          @click="sendToOrders">Slutför köp
-        </button>
-        <button
-          class="btn btn-primary py-3 px-6 mt-2 col-2 d-flex justify-content-center border-0"
+      <div class="col-12 d-flex justify-content-end gap-3 flex-wrap">
+        <button class="btn btn-danger d-flex justify-content-center border-0"
           @click="removeAllCartItems">Töm varukorg
+        </button>
+        <button class="btn btn-primary d-flex justify-content-center border-0"
+          @click="sendToOrders">Slutför köp
         </button>
       </div>
     </div>
@@ -131,8 +132,6 @@ function removeAllCartItems() {
 .btn-primary
 {
   background-color: #bb81f8;
-  flex: 0 1 auto;
-  min-width: 70px;
 }
 
 .btn-primary:hover

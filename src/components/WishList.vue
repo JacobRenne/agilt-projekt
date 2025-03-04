@@ -19,7 +19,7 @@ function removeFromWishList(product) {
       <tr>
         <th>Produkt</th>
         <th>Pris</th>
-        <th>Ta bort från önskelista</th>
+        <th>Ta bort</th>
       </tr>
     </thead>
     <tbody class="table-group-divider">

@@ -70,65 +70,66 @@ const createAccount = ref(true); // Set to false to disable form
           <div class="card">
             <div v-if="createAccount">
               <div class="card-header">
-                <h3 class="text-center">Create an Account</h3>
+                <h3 class="text-center">Skapa ett konto</h3>
               </div>
               <div class="card-body">
                 <form @submit.prevent="handleSubmit">
                   <div class="form-group">
-                    <label for="text">Full name</label>
+                    <label for="text">Fullständigt namn</label>
                     <input type="text" class="form-control" id="name"
                       v-model="name" required />
                   </div>
                   <div class="form-group">
-                    <label for="email">Email address</label>
+                    <label for="email">E-postadress</label>
                     <input type="email" class="form-control" id="email"
                       v-model="email" required />
                   </div>
                   <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Lösenord</label>
                     <input type="password" class="form-control" id="password"
                       v-model="password" required />
                   </div>
                   <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
+                    <label for="confirmPassword">Bekräfta lösenord</label>
                     <input type="password" class="form-control"
                       id="confirmPassword" v-model="confirmPassword" required />
                   </div>
                   <button type="submit"
-                    class="btn btn-primary btn-block mt-2">Create
-                    Account</button>
+                    class="btn btn-primary mt-2 d-flex ms-auto">Skapa
+                    konto</button>
                   <div v-if="errorMessage" class="alert alert-danger mt-3">{{
                     errorMessage }}</div>
                 </form>
                 <p class="text-center mt-3">
-                  Already have an account? <a href="#"
-                    @click="createAccount = false">Login</a>
+                  Har du redan ett konto? <a href="#" class="text-info"
+                    @click="createAccount = false">Logga in</a>
                 </p>
               </div>
             </div>
             <div v-else>
               <div class="card-header">
-                <h3 class="text-center">Login</h3>
+                <h3 class="text-center">Logga in</h3>
               </div>
               <div class="card-body">
                 <form @submit.prevent="handleLogin">
                   <div class="form-group">
-                    <label for="email">Email address</label>
+                    <label for="email">E-postadress</label>
                     <input type="email" class="form-control" id="email"
                       v-model="email" required />
                   </div>
                   <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Lösenord</label>
                     <input type="password" class="form-control" id="password"
                       v-model="password" required />
                   </div>
                   <button type="submit"
-                    class="btn btn-primary btn-block mt-2">Login</button>
+                    class="btn btn-primary btn-block mt-2 d-flex ms-auto">Logga
+                    in</button>
                   <div v-if="errorMessage" class="alert alert-danger mt-3">{{
                     errorMessage }}</div>
                   <p class="text-center mt-3">
-                    Don't have an account? <a href="#"
-                      @click="createAccount = true">Create Account</a>
+                    Har du inget konto? <a href="#" class="text-info"
+                      @click="createAccount = true">Skapa konto</a>
                   </p>
                 </form>
               </div>
@@ -175,5 +176,25 @@ const createAccount = ref(true); // Set to false to disable form
 .profil-section
 {
   background: #121212
+}
+
+.btn-primary
+{
+  background-color: #bb81f8;
+}
+
+.btn-primary:hover
+{
+  background-color: #9a67ea;
+}
+
+.text-info
+{
+  color: #bb81f8 !important
+}
+
+.text-info:hover
+{
+  color: #9a67ea !important
 }
 </style>
