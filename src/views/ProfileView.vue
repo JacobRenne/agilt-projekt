@@ -24,8 +24,8 @@ function confirmCancel(index) {
 }
 
 function cancelOrder() {
-  orders.value[selectedOrder.value].orderStatus = "Avbruten";
-  localStorage.setItem("orders", JSON.stringify(orders.value));
+  orders.value[selectedOrder.value].orderStatus = "Avbruten"
+  localStorage.setItem("orders", JSON.stringify(orders.value))
 }
 
 onMounted(() => {

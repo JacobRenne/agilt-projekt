@@ -44,10 +44,21 @@ function sendToOrders() {
   localStorage.removeItem('cart')
 }
 
-function removeFromCart(id) {
-  cartItems.value = cartItems.value.filter((item) => item.id !== id)
+const emit = defineEmits(['updateCart'])
+
+function removeFromCart(index) {
+  cartItems.value.splice(index, 1)
 
   localStorage.setItem('cart', JSON.stringify(cartItems.value))
+
+  emit("updateCart")
+}
+
+function removeAllCartItems() {
+  cartItems.value = []
+  localStorage.removeItem('cart')
+
+  emit("updateCart")
 }
 
 </script>
@@ -66,7 +77,7 @@ function removeFromCart(id) {
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <tr v-for="item in cartItems" :key="item.id" class="">
+          <tr v-for="(item, index) in cartItems" :key="item.id" class="">
             <td class="d-flex align-items-center gap-2 border-0">
               <img :src="item.bild" :alt="item.title"
                 class="image-thumbnail d-none d-sm-block" style="width: 90px;">
@@ -80,17 +91,22 @@ function removeFromCart(id) {
               <p class="m-0 fw-bold text-info">{{ item.pris }} kr</p>
             </td>
             <td class="align-middle border-0">
-              <button class="btn btn-danger" @click="removeFromCart(item.id)">Ta
+              <button class="btn btn-danger" @click="removeFromCart(index)">Ta
                 bort</button>
             </td>
           </tr>
         </tbody>
       </table>
       <h4>Totalt pris: <span class="text-info">{{ totalPrice }} kr</span></h4>
-      <div class="col-12 d-flex justify-content-end">
+      <div class="col-12 d-flex justify-content-start gap-3 flex-wrap">
         <button
-          class="btn btn-primary py-2 px-5 mt-2 col-2 d-flex justify-content-center"
-          @click="sendToOrders">Slutför köp</button>
+          class="btn btn-primary py-3 px-6 mt-2 col-2 d-flex justify-content-center border-0"
+          @click="sendToOrders">Slutför köp
+        </button>
+        <button
+          class="btn btn-primary py-3 px-6 mt-2 col-2 d-flex justify-content-center border-0"
+          @click="removeAllCartItems">Töm varukorg
+        </button>
       </div>
     </div>
     <div v-else>
@@ -115,6 +131,8 @@ function removeFromCart(id) {
 .btn-primary
 {
   background-color: #bb81f8;
+  flex: 0 1 auto;
+  min-width: 70px;
 }
 
 .btn-primary:hover

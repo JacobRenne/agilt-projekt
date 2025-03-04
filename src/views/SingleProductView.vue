@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref, defineEmits } from "vue";
 import { useRoute, RouterLink, useRouter } from "vue-router";
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
@@ -27,6 +27,8 @@ onMounted(async () => {
   }
 });
 
+const emit = defineEmits(['updateCart'])
+
 function addToCart() {
   let cart = []
   if (JSON.parse(localStorage.getItem('cart'))) {
@@ -43,6 +45,7 @@ function addToCart() {
   localStorage.setItem('cart', JSON.stringify(cart))
   toast.success('Produkt har lagts till')
 
+  emit("updateCart")
 }
 
 function saveToWishList() {

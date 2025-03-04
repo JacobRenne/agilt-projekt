@@ -3,14 +3,31 @@ import { RouterView } from "vue-router";
 import Footer from "./components/Footer.vue";
 import NavBar from "./components/NavBar.vue";
 import SmallNavBar from "./components/SmallNavBar.vue";
+import { ref } from "vue";
+
+
+
+const cartCount = ref(0)
+
+if (JSON.parse(localStorage.getItem("cart"))) {
+  cartCount.value = JSON.parse(localStorage.getItem("cart")).length
+}
+
+function updateCart() {
+  if (JSON.parse(localStorage.getItem("cart"))) {
+    cartCount.value = JSON.parse(localStorage.getItem("cart")).length
+  }
+  else cartCount.value = 0
+}
+
 </script>
 
 <template>
-  <NavBar />
+  <NavBar :cartCount="cartCount"/>
   <SmallNavBar />
   <div class="content">
     <!-- tvinga vue att omrenderar även om (id) ändras. för search.vue -->
-    <RouterView :key="$route.fullPath" />
+    <RouterView :key="$route.fullPath" @updateCart="updateCart"/>
   </div>
   <Footer />
 </template>
@@ -20,8 +37,10 @@ html,
 body
 {
   height: 100vh;
+  width: 100vw;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 #bg

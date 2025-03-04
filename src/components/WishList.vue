@@ -10,6 +10,7 @@ function removeFromWishList(product) {
   sessionStorage.setItem("wishList", JSON.stringify(wishList.value));
   emit("updateWishList", wishList.value);
 }
+
 </script>
 
 <template>

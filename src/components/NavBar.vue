@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute } from 'vue-router';
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 import Search from './Search.vue';
 
 const route = useRoute();
@@ -16,6 +16,8 @@ const handleResize = () => {
   }
 };
 
+defineProps(["cartCount"])
+
 onMounted(() => {
   window.addEventListener('resize', handleResize);
 });
@@ -27,7 +29,7 @@ onUnmounted(() => {
 
 <template>
   <nav class="navbar navbar-dark navbar-expand-lg">
-    <div class="custom-container gap-5">
+    <div class="custom-container gap-5 d-flex flex-wrap">
       <RouterLink to="/">
         <span class="gradient-text fs-3 fw-bold">Grafikbanken .</span>
       </RouterLink>
@@ -48,6 +50,10 @@ onUnmounted(() => {
           <i class="bi bi-person-circle fs-3"></i>
         </RouterLink>
         <RouterLink to="/cart">
+          <span v-if="cartCount > 0" 
+            class="position-absolute badge rounded-pill bg-danger">
+            {{ cartCount }}
+          </span>
           <i class="bi bi-cart fs-3"></i>
         </RouterLink>
       </div>
