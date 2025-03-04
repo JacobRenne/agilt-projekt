@@ -1,26 +1,63 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
+import axios from "axios";
 import WishList from "../components/WishList.vue";
 import { Modal } from "bootstrap";
+import LogIn from "../components/LogIn.vue";
 
-const user = ref(
-  JSON.parse(localStorage.getItem("user")) || {
-    id: 1,
-    name: "John Doe",
-    email: "exempel@email.se",
-    phone: "+46 123456789",
-    address: "exempel väg 1",
-    password: "",
+const isLoggedIn = ref(JSON.parse(sessionStorage.getItem("isLoggedIn")) || false);
+const currentUser = ref(JSON.parse(sessionStorage.getItem("userId")));
+
+const handleLoginStatus = (status) => {
+  isLoggedIn.value = status;
+};
+
+const handleLogout = () => {
+  sessionStorage.setItem("isLoggedIn", "false");
+  isLoggedIn.value = false;
+  sessionStorage.removeItem("isLoggedIn");
+  sessionStorage.removeItem("userId");
+};
+
+const user = ref({
+  id: "",
+  name: "",
+  email: "",
+  phone: "",
+  address: "",
+  password: "",
+});
+
+const fetchUserData = async () => {
+  try {
+    const response = await axios.get("https://67c6b656351c081993fe6431.mockapi.io/users/" + currentUser.value);
+    user.value = response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
   }
-);
+};
+
+const saveUserInfo = async () => {
+  try {
+    const response = await axios.put(`https://67c6b656351c081993fe6431.mockapi.io/users/${user.value.id}`, user.value);
+    console.log("User info updated:", response.data);
+    localStorage.setItem("user", JSON.stringify(user.value));
+  } catch (error) {
+    console.error("Error updating user info:", error);
+  }
+};
+
+onMounted(() => {
+  fetchUserData();
+});
 
 const orders = ref(JSON.parse(localStorage.getItem("orders") || "[]"));
-let selectedOrder = ref()
+let selectedOrder = ref();
 
 function confirmCancel(index) {
-  selectedOrder.value = index
-  let modal = new Modal(document.getElementById('confirmModal'))
-  modal.show()
+  selectedOrder.value = index;
+  let modal = new Modal(document.getElementById("confirmModal"));
+  modal.show();
 }
 
 function cancelOrder() {
@@ -28,14 +65,11 @@ function cancelOrder() {
   localStorage.setItem("orders", JSON.stringify(orders.value));
 }
 
-onMounted(() => {
-  localStorage.setItem("user", JSON.stringify(user.value));
-});
-
 const wishList = ref(JSON.parse(sessionStorage.getItem("wishList")) || []);
 const updateWishList = (newWishList) => {
   wishList.value = newWishList;
 };
+
 const props = defineProps({
   activa: {
     type: Number,
@@ -90,10 +124,6 @@ watch(selected, (newValue) => {
     showWishlist.value = true;
   }
 });
-
-const saveUserInfo = () => {
-  localStorage.setItem("user", JSON.stringify(user.value));
-};
 </script>
 
 <template>
@@ -111,133 +141,123 @@ const saveUserInfo = () => {
       </div>
     </div>
   </div>
-  <section>
-    <div class="container p-4 mt-3 rounded shadow-sm mb-5"
-      style="background-color: #333333">
+  <section class="bg-dark">
+    <div v-if="!isLoggedIn">
+      <LogIn @update:isLoggedIn="handleLoginStatus" />
+    </div>
+    <div v-else class="container p-4 mt-3 rounded shadow-sm" style="background-color: #333333">
       <div class="row">
-        <div class="col-md-3 p-3 rounded rounded text-center text-md-start"
-          style="background-color: #333333">
-          <BFormRadioGroup v-model="selected" :options="options"
-            name="radios-btn-group1" size="lg" buttons stacked
-            class="nav-buttons" />
-        </div>
-        <div v-if="showOrders" class="col-md-9 text-light content-section">
-          <h1 class="h4 mb-3 text-center text-md-start">Mina ordrar</h1>
-          <p class="text-center text-md-start">Här hittar du samtliga
-            beställningar.</p>
-          <div class="mb-3">
-            <input type="text" class="form-control"
-              placeholder="Sök efter produktnamn eller ordernummer" />
+        <div class="col-md-3 p-3 rounded" style="background-color: #333333">
+          <BFormRadioGroup v-model="selected" :options="options" name="radios-btn-group1" size="lg" buttons stacked />
+          <div class="mt-auto">
+            <button class="btn btn-danger mt-3" @click="handleLogout">Log Out</button>
           </div>
-          <div v-if="orders.length > 0">
-            <table class="table table-dark m-0 rounded-3 overflow-hidden">
-              <thead>
-                <tr>
-                  <th>Produkt</th>
-                  <th>Pris</th>
-                  <th>Orderstatus</th>
-                  <th>Avbeställ</th>
-                </tr>
-              </thead>
-              <tbody class="table-group-divider">
-                <tr v-for="(item, index) in orders" :key="item.id" class="">
-                  <td class="d-flex align-items-center gap-2 border-0">
-                    <img :src="item.bild" :alt="item.title"
-                      class="image-thumbnail d-none d-sm-block"
-                      style="width: 90px" />
-                    <RouterLink :to="'products/' + item.id"
-                      class="text-white text-decoration-none">
-                      <p class="m-0">{{ item.title }}</p>
-                    </RouterLink>
-                  </td>
-                  <td class="align-middle border-0">
-                    <p class="m-0 text-info fw-bold">{{ item.pris }} kr</p>
-                  </td>
-                  <td class="align-middle border-0">
-                    <p class="m-0">{{ item.orderStatus }}</p>
-                  </td>
-                  <td class="align-middle border-0">
-                    <button class="btn btn-danger" @click="confirmCancel(index)"
-                      v-if="item.orderStatus === 'Levereras'">
-                      Avbeställ
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div v-else class="text-center text-md-start">
-            <p>Du har inga beställningar</p>
-          </div>
-        </div>
-        <div v-if="showProfileSettings"
-          class="col-md-9 text-light content-section">
-          <h1 class="h4 mb-3 text-center text-md-start">Profilinställningar</h1>
-          <p class="text-center text-md-start">Här kan du se dina
-            profilinställningar.</p>
-          <div>
-            <p class="profile-settings">Namn: {{ user.name }}</p>
-            <p class="profile-settings">E-postadress: {{ user.email }}</p>
-            <p class="profile-settings">Telefonnummer: {{ user.phone }}</p>
-            <p class="profile-settings">Adress: {{ user.address }}</p>
-          </div>
-          <p class="text-center text-md-start">Här kan du ändra dina
-            profilinställningar.</p>
-          <div>
-            <BFormGroup class="mb-3">
-              <BFormInput class="mb-2" type="text" v-model="user.name"
-                placeholder="Namn" />
-              <BFormInput class="mb-2" type="email" v-model="user.email"
-                placeholder="E-postadress" />
-              <BFormInput class="mb-2" type="tel" v-model="user.phone"
-                placeholder="Telefonnummer" />
-              <BFormInput class="mb-2" type="text" v-model="user.address"
-                placeholder="Adress" />
-              <BFormInput class="mb-2" type="password" v-model="user.password"
-                placeholder="Nytt lösenord" />
-              <BFormInput class="mb-2" type="password"
-                placeholder="Bekräfta nytt lösenord" />
-            </BFormGroup>
-            <div class="text-center text-md-end">
-              <button class="btn btn-primary"
-                @click="saveUserInfo">Spara</button>
+          <div v-if="showOrders" class="col-md-9 text-light content-section">
+            <h1 class="h4 mb-3 text-center text-md-start">Mina ordrar</h1>
+            <p class="text-center text-md-start">Här hittar du samtliga beställningar.</p>
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Sök efter produktnamn eller ordernummer" />
+            </div>
+            <div v-if="orders.length > 0">
+              <table class="table table-dark m-0 rounded-3 overflow-hidden">
+                <thead>
+                  <tr>
+                    <th>Produkt</th>
+                    <th>Pris</th>
+                    <th>Orderstatus</th>
+                    <th>Avbeställ</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr v-for="(item, index) in orders" :key="item.id" class="">
+                    <td class="d-flex align-items-center gap-2 border-0">
+                      <img
+                        :src="item.bild"
+                        :alt="item.title"
+                        class="image-thumbnail d-none d-sm-block"
+                        style="width: 90px"
+                      />
+                      <RouterLink :to="'products/' + item.id" class="text-white text-decoration-none">
+                        <p class="m-0">{{ item.title }}</p>
+                      </RouterLink>
+                    </td>
+                    <td class="align-middle border-0">
+                      <p class="m-0 text-info fw-bold">{{ item.pris }} kr</p>
+                    </td>
+                    <td class="align-middle border-0">
+                      <p class="m-0">{{ item.orderStatus }}</p>
+                    </td>
+                    <td class="align-middle border-0">
+                      <button
+                        class="btn btn-danger"
+                        @click="confirmCancel(index)"
+                        v-if="item.orderStatus === 'Levereras'"
+                      >
+                        Avbeställ
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div v-else class="text-center text-md-start">
+              <p>Du har inga beställningar</p>
             </div>
           </div>
-        </div>
-        <div v-if="showWishlist" class="col-md-9 text-light content-section">
-          <h1 class="h4 mb-3 text-center text-md-start">Önskelista</h1>
-          <p class="text-center text-md-start">Här kan du se din önskelista.</p>
-          <div class="rounded-3 overflow-hidden" v-if="wishList.length > 0">
-            <WishList @updateWishList="updateWishList" />
+          <div v-if="showProfileSettings" class="col-md-9 text-light content-section">
+            <h1 class="h4 mb-3 text-center text-md-start">Profilinställningar</h1>
+            <p class="text-center text-md-start">Här kan du se dina profilinställningar.</p>
+            <div>
+              <p class="profile-settings">Namn: {{ user.name }}</p>
+              <p class="profile-settings">E-postadress: {{ user.email }}</p>
+              <p class="profile-settings">Telefonnummer: {{ user.phone }}</p>
+              <p class="profile-settings">Adress: {{ user.address }}</p>
+            </div>
+            <p class="text-center text-md-start">Här kan du ändra dina profilinställningar.</p>
+            <div>
+              <BFormGroup class="mb-3">
+                <BFormInput class="mb-2" type="text" v-model="user.name" placeholder="Namn" />
+                <BFormInput class="mb-2" type="email" v-model="user.email" placeholder="E-postadress" />
+                <BFormInput class="mb-2" type="tel" v-model="user.phone" placeholder="Telefonnummer" />
+                <BFormInput class="mb-2" type="text" v-model="user.address" placeholder="Adress" />
+                <BFormInput class="mb-2" type="password" v-model="user.password" placeholder="Nytt lösenord" />
+                <BFormInput class="mb-2" type="password" placeholder="Bekräfta nytt lösenord" />
+              </BFormGroup>
+              <div class="text-center text-md-end">
+                <button class="btn btn-primary" @click="saveUserInfo">Spara</button>
+              </div>
+            </div>
           </div>
-          <div v-else>
-            <p class="fst-italic">Din önskelista är tom</p>
+          <div v-if="showWishlist" class="col-md-9 text-light content-section">
+            <h1 class="h4 mb-3 text-center text-md-start">Önskelista</h1>
+            <p class="text-center text-md-start">Här kan du se din önskelista.</p>
+            <div class="rounded-3 overflow-hidden" v-if="wishList.length > 0">
+              <WishList @updateWishList="updateWishList" />
+            </div>
+            <div v-else>
+              <p class="fst-italic">Din önskelista är tom</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
   </section>
 </template>
 
 <style scoped>
-.btn-primary
-{
+.btn-primary {
   background-color: #bb81f8;
 }
 
-.btn-primary:hover
-{
+.btn-primary:hover {
   background-color: #9a67ea;
 }
 
-.text-info
-{
+.text-info {
   color: #bb81f8 !important;
 }
 
-.profile-settings
-{
+.profile-settings {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -250,23 +270,19 @@ const saveUserInfo = () => {
   margin-bottom: 0.5rem;
 }
 
-@media (max-width: 767.98px)
-{
-  .nav-buttons
-  {
+@media (max-width: 767.98px) {
+  .nav-buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .profile-info
-  {
+  .profile-info {
     max-width: 90%;
     margin: 0 auto;
   }
 
-  .table-responsive
-  {
+  .table-responsive {
     overflow-x: auto;
   }
 }
