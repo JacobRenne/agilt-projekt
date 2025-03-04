@@ -63,91 +63,117 @@ const createAccount = ref(true); // Set to false to disable form
 </script>
 
 <template>
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div v-if="createAccount">
-            <div class="card-header">
-              <h3 class="text-center">Create an Account</h3>
-            </div>
-            <div class="card-body">
-              <form @submit.prevent="handleSubmit">
-                <div class="form-group">
-                  <label for="text">Full name</label>
-                  <input type="text" class="form-control" id="name" v-model="name" required />
-                </div>
-                <div class="form-group">
-                  <label for="email">Email address</label>
-                  <input type="email" class="form-control" id="email" v-model="email" required />
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" v-model="password" required />
-                </div>
-                <div class="form-group">
-                  <label for="confirmPassword">Confirm Password</label>
-                  <input type="password" class="form-control" id="confirmPassword" v-model="confirmPassword" required />
-                </div>
-                <button type="submit" class="btn btn-primary btn-block mt-2">Create Account</button>
-                <div v-if="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
-              </form>
-              <p class="text-center mt-3">
-                Already have an account? <a href="#" @click="createAccount = false">Login</a>
-              </p>
-            </div>
-          </div>
-          <div v-else>
-            <div class="card-header">
-              <h3 class="text-center">Login</h3>
-            </div>
-            <div class="card-body">
-              <form @submit.prevent="handleLogin">
-                <div class="form-group">
-                  <label for="email">Email address</label>
-                  <input type="email" class="form-control" id="email" v-model="email" required />
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" v-model="password" required />
-                </div>
-                <button type="submit" class="btn btn-primary btn-block mt-2">Login</button>
-                <div v-if="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+  <section class="profil-section mt-5 mb-5">
+    <div class="container ">
+      <div class="row justify-content-center">
+        <div class="col-md-6 ">
+          <div class="card">
+            <div v-if="createAccount">
+              <div class="card-header">
+                <h3 class="text-center">Create an Account</h3>
+              </div>
+              <div class="card-body">
+                <form @submit.prevent="handleSubmit">
+                  <div class="form-group">
+                    <label for="text">Full name</label>
+                    <input type="text" class="form-control" id="name"
+                      v-model="name" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email"
+                      v-model="email" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password"
+                      v-model="password" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control"
+                      id="confirmPassword" v-model="confirmPassword" required />
+                  </div>
+                  <button type="submit"
+                    class="btn btn-primary btn-block mt-2">Create
+                    Account</button>
+                  <div v-if="errorMessage" class="alert alert-danger mt-3">{{
+                    errorMessage }}</div>
+                </form>
                 <p class="text-center mt-3">
-                  Don't have an account? <a href="#" @click="createAccount = true">Create Account</a>
+                  Already have an account? <a href="#"
+                    @click="createAccount = false">Login</a>
                 </p>
-              </form>
+              </div>
+            </div>
+            <div v-else>
+              <div class="card-header">
+                <h3 class="text-center">Login</h3>
+              </div>
+              <div class="card-body">
+                <form @submit.prevent="handleLogin">
+                  <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email"
+                      v-model="email" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password"
+                      v-model="password" required />
+                  </div>
+                  <button type="submit"
+                    class="btn btn-primary btn-block mt-2">Login</button>
+                  <div v-if="errorMessage" class="alert alert-danger mt-3">{{
+                    errorMessage }}</div>
+                  <p class="text-center mt-3">
+                    Don't have an account? <a href="#"
+                      @click="createAccount = true">Create Account</a>
+                  </p>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
-.container {
-  margin-top: 100px;
-}
-.card {
+.card
+{
   background-color: #333333;
   color: white;
 }
-.card-header {
+
+.card-header
+{
   background-color: #444444;
 }
-.form-control {
+
+.form-control
+{
   background-color: #555555;
   color: white;
   border: 1px solid #666666;
 }
-.btn-primary {
+
+.btn-primary
+{
   background-color: #007bff;
   border-color: #007bff;
 }
-.alert-danger {
+
+.alert-danger
+{
   background-color: #ff4d4d;
   border-color: #ff4d4d;
   color: white;
+}
+
+.profil-section
+{
+  background: #121212
 }
 </style>
