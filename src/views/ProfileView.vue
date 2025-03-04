@@ -240,7 +240,7 @@ watch(selected, (newValue) => {
               <BFormInput class="mb-2" type="password"
                 placeholder="Bekräfta nytt lösenord" />
             </BFormGroup>
-            <div class="text-center text-md-end">
+            <div class="text-end">
               <button class="btn btn-primary"
                 @click="saveUserInfo">Spara</button>
             </div>

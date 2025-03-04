@@ -92,20 +92,22 @@ function removeAllCartItems() {
               <p class="m-0 fw-bold text-info">{{ item.pris }} kr</p>
             </td>
             <td class="align-middle border-0">
-              <button
-                class="btn btn-danger border-0"
+              <button class="btn btn-danger border-0"
                 @click="removeFromCart(index)">Ta
                 bort</button>
             </td>
           </tr>
         </tbody>
       </table>
-      <h4>Totalt pris: <span class="text-info">{{ totalPrice }} kr</span></h4>
-      <div class="col-12 d-flex justify-content-end gap-3 flex-wrap">
-        <button class="btn btn-danger d-flex justify-content-center border-0"
+      <h4 class="col-6 d-flex me-auto ms-2">Totalt pris: <span
+        class="text-info"> {{ totalPrice }} kr</span></h4>
+        <div class="col-12 d-flex justify-content-end gap-3 flex-wrap">
+        <button
+          class="btn btn-danger d-flex justify-content-center border-0"
           @click="removeAllCartItems">Töm varukorg
         </button>
-        <button class="btn btn-primary d-flex justify-content-center border-0"
+        <button
+          class="btn btn-primary d-flex justify-content-center border-0 me-4"
           @click="sendToOrders">Slutför köp
         </button>
       </div>
