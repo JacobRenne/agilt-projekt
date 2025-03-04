@@ -82,7 +82,7 @@ watch(currentPage, () => {
   <section class="d-flex">
     <div v-if="showButton" class="mx-auto">
       <RouterLink to="/products">
-        <button class="btn btn-primary w-100 py-2 px-5 mb-5">Visa alla
+        <button class="btn btn-primary w-100 mb-5">Visa alla
           produkter</button>
       </RouterLink>
     </div>

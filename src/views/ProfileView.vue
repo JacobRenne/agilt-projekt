@@ -90,8 +90,8 @@ const props = defineProps({
 });
 
 const options = [
-  { text: "Beställningar", value: "orders" },
-  { text: "Profilinställningar", value: "profilesettings" },
+  { text: "Ordrar", value: "orders" },
+  { text: "Profil", value: "profilesettings" },
   { text: "Önskelista", value: "wishlist" },
 ];
 
@@ -154,13 +154,13 @@ watch(selected, (newValue) => {
     <div v-else class="container p-4 mt-3 rounded shadow-sm mb-5"
       style="background-color: #333333">
       <div class="row">
-        <div class="col-md-3 p-3 rounded rounded text-center text-md-start"
+        <div class="col-md-2 p-3 rounded rounded text-center text-md-start"
           style="background-color: #333333">
           <BFormRadioGroup v-model="selected" :options="options"
             name="radios-btn-group1" size="lg" buttons stacked />
           <div class="mt-auto">
-            <button class="btn btn-danger mt-3" @click="handleLogout">Log
-              Out</button>
+            <button class="btn btn-danger mt-3" @click="handleLogout">Logga
+              ut</button>
           </div>
         </div>
         <div v-if="showOrders" class="col-md-9 text-light content-section">
@@ -177,8 +177,8 @@ watch(selected, (newValue) => {
                 <tr>
                   <th>Produkt</th>
                   <th>Pris</th>
-                  <th>Orderstatus</th>
-                  <th>Avbeställ</th>
+                  <th>Order</th>
+                  <th>Avbryt</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider">
@@ -201,7 +201,7 @@ watch(selected, (newValue) => {
                   <td class="align-middle border-0">
                     <button class="btn btn-danger" @click="confirmCancel(index)"
                       v-if="item.orderStatus === 'Levereras'">
-                      Avbeställ
+                      Avbryt
                     </button>
                   </td>
                 </tr>
@@ -214,9 +214,9 @@ watch(selected, (newValue) => {
         </div>
         <div v-if="showProfileSettings"
           class="col-md-9 text-light content-section">
-          <h1 class="h4 mb-3 text-center text-md-start">Profilinställningar</h1>
+          <h1 class="h4 mb-3 text-center text-md-start">Profil</h1>
           <p class="text-center text-md-start">Här kan du se dina
-            profilinställningar.</p>
+            Inställningar.</p>
           <div>
             <p class="profile-settings">Namn: {{ user.name }}</p>
             <p class="profile-settings">E-postadress: {{ user.email }}</p>
@@ -224,7 +224,7 @@ watch(selected, (newValue) => {
             <p class="profile-settings">Adress: {{ user.address }}</p>
           </div>
           <p class="text-center text-md-start">Här kan du ändra dina
-            profilinställningar.</p>
+            Inställningar.</p>
           <div>
             <BFormGroup class="mb-3">
               <BFormInput class="mb-2" type="text" v-model="user.name"

@@ -33,7 +33,7 @@ defineProps({
                 </button>
               </RouterLink>
               <RouterLink to="/sell">
-                <button class="ms-2 py-2 px-5 btn btn-dark">Sälj
+                <button class="ms-2 py-2 px-5 btn btn-danger">Sälj
                 </button>
               </RouterLink>
             </div>
