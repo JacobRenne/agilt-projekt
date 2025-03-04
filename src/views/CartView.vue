@@ -107,6 +107,12 @@ function removeAllCartItems() {
           class="btn btn-primary py-3 px-6 mt-2 col-2 d-flex justify-content-center border-0"
           @click="removeAllCartItems">Töm varukorg
         </button>
+      <div class="d-flex justify-content-evenly w-100 ">
+        <h4>Totalt pris: <span class="text-info">{{ totalPrice }} kr</span></h4>
+        <div class="col-6 d-flex justify-content-end">
+          <button class="btn btn-primary py-2 d-flex justify-content-center"
+            @click="sendToOrders">Slutför köp</button>
+        </div>
       </div>
     </div>
     <div v-else>

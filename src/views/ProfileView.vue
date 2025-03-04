@@ -1,26 +1,63 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
+import axios from "axios";
 import WishList from "../components/WishList.vue";
 import { Modal } from "bootstrap";
+import LogIn from "../components/LogIn.vue";
 
-const user = ref(
-  JSON.parse(localStorage.getItem("user")) || {
-    id: 1,
-    name: "John Doe",
-    email: "exempel@email.se",
-    phone: "+46 123456789",
-    address: "exempel väg 1",
-    password: "",
+const isLoggedIn = ref(JSON.parse(sessionStorage.getItem("isLoggedIn")) || false);
+const currentUser = ref(JSON.parse(sessionStorage.getItem("userId")));
+
+const handleLoginStatus = (status) => {
+  isLoggedIn.value = status;
+};
+
+const handleLogout = () => {
+  sessionStorage.setItem("isLoggedIn", "false");
+  isLoggedIn.value = false;
+  sessionStorage.removeItem("isLoggedIn");
+  sessionStorage.removeItem("userId");
+};
+
+const user = ref({
+  id: "",
+  name: "",
+  email: "",
+  phone: "",
+  address: "",
+  password: "",
+});
+
+const fetchUserData = async () => {
+  try {
+    const response = await axios.get("https://67c6b656351c081993fe6431.mockapi.io/users/" + currentUser.value);
+    user.value = response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
   }
-);
+};
+
+const saveUserInfo = async () => {
+  try {
+    const response = await axios.put(`https://67c6b656351c081993fe6431.mockapi.io/users/${user.value.id}`, user.value);
+    console.log("User info updated:", response.data);
+    localStorage.setItem("user", JSON.stringify(user.value));
+  } catch (error) {
+    console.error("Error updating user info:", error);
+  }
+};
+
+onMounted(() => {
+  fetchUserData();
+});
 
 const orders = ref(JSON.parse(localStorage.getItem("orders") || "[]"));
-let selectedOrder = ref()
+let selectedOrder = ref();
 
 function confirmCancel(index) {
-  selectedOrder.value = index
-  let modal = new Modal(document.getElementById('confirmModal'))
-  modal.show()
+  selectedOrder.value = index;
+  let modal = new Modal(document.getElementById("confirmModal"));
+  modal.show();
 }
 
 function cancelOrder() {
@@ -28,14 +65,11 @@ function cancelOrder() {
   localStorage.setItem("orders", JSON.stringify(orders.value))
 }
 
-onMounted(() => {
-  localStorage.setItem("user", JSON.stringify(user.value));
-});
-
 const wishList = ref(JSON.parse(sessionStorage.getItem("wishList")) || []);
 const updateWishList = (newWishList) => {
   wishList.value = newWishList;
 };
+
 const props = defineProps({
   activa: {
     type: Number,
@@ -90,36 +124,44 @@ watch(selected, (newValue) => {
     showWishlist.value = true;
   }
 });
-
-const saveUserInfo = () => {
-  localStorage.setItem("user", JSON.stringify(user.value));
-};
 </script>
 
 <template>
-  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
+  <div class="modal fade" id="confirmModal" tabindex="-1"
+    aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark ">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="confirmModalLabel">Är du säker att du vill avbryta denna beställning?</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h1 class="modal-title fs-6 text-white m-auto" id="confirmModalLabel">
+            Är du säker att du
+            vill avbryta denna beställning?</h1>
+          <button type="button" class="btn-close bg-light"
+            data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-footer d-flex justify-content-center">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="cancelOrder">Ja</button>
-          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Nej</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+            @click="cancelOrder">Ja</button>
+          <button type="button" class="btn btn-danger"
+            data-bs-dismiss="modal">Nej</button>
         </div>
       </div>
     </div>
   </div>
   <section>
-    <div class="container p-4 mt-3 rounded shadow-sm mb-5"
+    <div v-if="!isLoggedIn">
+      <LogIn @update:isLoggedIn="handleLoginStatus" />
+    </div>
+    <div v-else class="container p-4 mt-3 rounded shadow-sm mb-5"
       style="background-color: #333333">
       <div class="row">
         <div class="col-md-3 p-3 rounded rounded text-center text-md-start"
           style="background-color: #333333">
           <BFormRadioGroup v-model="selected" :options="options"
-            name="radios-btn-group1" size="lg" buttons stacked
-            class="nav-buttons" />
+            name="radios-btn-group1" size="lg" buttons stacked />
+          <div class="mt-auto">
+            <button class="btn btn-danger mt-3" @click="handleLogout">Log
+              Out</button>
+          </div>
         </div>
         <div v-if="showOrders" class="col-md-9 text-light content-section">
           <h1 class="h4 mb-3 text-center text-md-start">Mina ordrar</h1>
@@ -216,7 +258,6 @@ const saveUserInfo = () => {
         </div>
       </div>
     </div>
-
   </section>
 </template>
 
@@ -269,5 +310,19 @@ const saveUserInfo = () => {
   {
     overflow-x: auto;
   }
+}
+
+.modal-dialog-centered
+{
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 1rem);
+}
+
+.modal-dialog-centered::before
+{
+  display: block;
+  height: calc(100vh - 1rem);
+  content: "";
 }
 </style>
