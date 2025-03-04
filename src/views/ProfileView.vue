@@ -1,17 +1,54 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
+import axios from "axios";
 import WishList from "../components/WishList.vue";
+import LogIn from "../components/LogIn.vue";
 
-const user = ref(
-  JSON.parse(localStorage.getItem("user")) || {
-    id: 1,
-    name: "John Doe",
-    email: "exempel@email.se",
-    phone: "+46 123456789",
-    address: "exempel väg 1",
-    password: "",
+const isLoggedIn = ref(JSON.parse(sessionStorage.getItem("isLoggedIn")) || false);
+const currentUser = ref(JSON.parse(sessionStorage.getItem("userId")));
+
+const handleLoginStatus = (status) => {
+  isLoggedIn.value = status;
+};
+
+const handleLogout = () => {
+  sessionStorage.setItem("isLoggedIn", "false");
+  isLoggedIn.value = false;
+  sessionStorage.removeItem("isLoggedIn");
+  sessionStorage.removeItem("userId");
+};
+
+const user = ref({
+  id: "",
+  name: "",
+  email: "",
+  phone: "",
+  address: "",
+  password: "",
+});
+
+const fetchUserData = async () => {
+  try {
+    const response = await axios.get("https://67c6b656351c081993fe6431.mockapi.io/users/" + currentUser.value);
+    user.value = response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
   }
-);
+};
+
+const saveUserInfo = async () => {
+  try {
+    const response = await axios.put(`https://67c6b656351c081993fe6431.mockapi.io/users/${user.value.id}`, user.value);
+    console.log("User info updated:", response.data);
+    localStorage.setItem("user", JSON.stringify(user.value));
+  } catch (error) {
+    console.error("Error updating user info:", error);
+  }
+};
+
+onMounted(() => {
+  fetchUserData();
+});
 
 const orders = ref(JSON.parse(localStorage.getItem("orders") || "[]"));
 
@@ -20,14 +57,11 @@ function cancelOrder(index) {
   localStorage.setItem("orders", JSON.stringify(orders.value));
 }
 
-onMounted(() => {
-  localStorage.setItem("user", JSON.stringify(user.value));
-});
-
 const wishList = ref(JSON.parse(sessionStorage.getItem("wishList")) || []);
 const updateWishList = (newWishList) => {
   wishList.value = newWishList;
 };
+
 const props = defineProps({
   activa: {
     type: Number,
@@ -82,18 +116,20 @@ watch(selected, (newValue) => {
     showWishlist.value = true;
   }
 });
-
-const saveUserInfo = () => {
-  localStorage.setItem("user", JSON.stringify(user.value));
-};
 </script>
 
 <template>
   <section class="bg-dark">
-    <div class="container p-4 mt-3 rounded shadow-sm" style="background-color: #333333">
+    <div v-if="!isLoggedIn">
+      <LogIn @update:isLoggedIn="handleLoginStatus" />
+    </div>
+    <div v-else class="container p-4 mt-3 rounded shadow-sm" style="background-color: #333333">
       <div class="row">
         <div class="col-md-3 p-3 rounded" style="background-color: #333333">
           <BFormRadioGroup v-model="selected" :options="options" name="radios-btn-group1" size="lg" buttons stacked />
+          <div class="mt-auto">
+            <button class="btn btn-danger mt-3" @click="handleLogout">Log Out</button>
+          </div>
         </div>
         <div v-if="showOrders" class="col-md-9 text-light">
           <h1 class="h4 mb-3">Mina ordrar</h1>
@@ -139,7 +175,9 @@ const saveUserInfo = () => {
               </tbody>
             </table>
           </div>
-          <div v-else><p>Du har inga beställningar</p></div>
+          <div v-else>
+            <p>Du har inga beställningar</p>
+          </div>
         </div>
         <div v-if="showProfileSettings" class="col-md-9 text-light">
           <h1 class="h4 mb-3">Profilinställningar</h1>
