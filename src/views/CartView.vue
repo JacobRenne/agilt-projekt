@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { Modal } from 'bootstrap'
 
 const cartItems = ref([])
 const router = useRouter()
@@ -42,6 +43,8 @@ function sendToOrders() {
 
   cartItems.value = []
   localStorage.removeItem('cart')
+
+  emit("updateCart")
 }
 
 const emit = defineEmits(['updateCart'])
@@ -54,6 +57,12 @@ function removeFromCart(index) {
   emit("updateCart")
 }
 
+
+function confirmCancel() {
+  let modal = new Modal(document.getElementById("confirmModal"));
+  modal.show();
+}
+
 function removeAllCartItems() {
   cartItems.value = []
   localStorage.removeItem('cart')
@@ -64,6 +73,26 @@ function removeAllCartItems() {
 </script>
 
 <template>
+  <div class="modal fade" id="confirmModal" tabindex="-1"
+    aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark ">
+        <div class="modal-header">
+          <h1 class="modal-title fs-6 text-white m-auto" id="confirmModalLabel">
+            Är du säker att du
+            vill ta bort allt i din varukorg?</h1>
+          <button type="button" class="btn-close bg-light"
+            data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+            @click="removeAllCartItems">Ja</button>
+          <button type="button" class="btn btn-danger"
+            data-bs-dismiss="modal">Nej</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container py-4 px-0 mt-3 rounded shadow-sm d-flex flex-column text-white align-items-center mb-5">
     <h4 class="mb-4">Din varukorg</h4>
     
@@ -105,7 +134,7 @@ function removeAllCartItems() {
         </button>
         <button
           class="btn btn-primary py-3 px-6 mt-2 col-2 d-flex justify-content-center border-0"
-          @click="removeAllCartItems">Töm varukorg
+          @click="confirmCancel">Töm varukorg
         </button>
       </div>
     </div>
@@ -138,5 +167,19 @@ function removeAllCartItems() {
 .btn-primary:hover
 {
   background-color: #9a67ea;
+}
+
+.modal-dialog-centered
+{
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 1rem);
+}
+
+.modal-dialog-centered::before
+{
+  display: block;
+  height: calc(100vh - 1rem);
+  content: "";
 }
 </style>
