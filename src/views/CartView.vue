@@ -132,7 +132,7 @@ function removeAllCartItems() {
         <div class="col-12 d-flex justify-content-end gap-3 flex-wrap">
         <button
           class="btn btn-danger d-flex justify-content-center border-0"
-          @click="removeAllCartItems">Töm varukorg
+          @click="confirmCancel">Töm varukorg
         </button>
         <button
           class="btn btn-primary d-flex justify-content-center border-0 me-4"
