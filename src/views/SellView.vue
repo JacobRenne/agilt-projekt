@@ -131,8 +131,14 @@ const selectImage = (imageUrl) => {
 
       <div class="col-6 col-md-3">
         <label for="pris" class="form-label">Pris:</label>
-        <input type="number" v-model="form.pris" id="pris" name="pris"
-          class="form-control" required />
+        <select v-model="form.pris" id="pris" name="pris" class="form-select"
+          required>
+          <option value="1000">1000 kr</option>
+          <option value="1500">1500 kr</option>
+          <option value="2000">2000 kr</option>
+          <option value="2500">2500 kr</option>
+          <option value="3000">3000 kr</option>
+        </select>
       </div>
 
       <div class="col-12">
