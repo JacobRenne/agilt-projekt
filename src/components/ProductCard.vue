@@ -13,14 +13,15 @@ const props = defineProps({
 <template>
     <div class="rounded shadow-md position-relative product-card">
         <div class="p-3 d-flex flex-column">
-            <RouterLink :to="'products/' + product.id">
+            <RouterLink :to="'products/' + product.id"
+              class="text-decoration-none">
                 <div class="col-12">
                     <img :src="product.bild" :alt="product.title"
                       class="img-fluid rounded">
                 </div>
+                <h3 class="fs-6 fw-bold text-white text-center text-truncate">{{
+                    product.title }}</h3>
             </RouterLink>
-            <h3 class="fs-6 fw-bold text-white text-center text-truncate">{{
-                product.title }}</h3>
             <div class="d-flex justify-content-end mt-2">
                 <div class="text-primary fw-bold">{{ product.pris }} kr</div>
             </div>
