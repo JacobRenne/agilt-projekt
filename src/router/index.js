@@ -6,6 +6,7 @@ import ProductsView from '../views/ProductsView.vue'
 import SellView from '../views/SellView.vue'
 import SingleProductView from '../views/SingleProductView.vue'
 import ThanksView from '../views/ThanksView.vue'
+import OmOssView from '../views/OmOssView.vue'
 
 
 const routes = [
@@ -16,6 +17,7 @@ const routes = [
   { path: '/sell', name: 'Sell', component: SellView, meta: { showSearch: true } },
   { path: '/products/:id', name: 'Product', component: SingleProductView, meta: { showSearch: true } },
   { path: '/thanks', name: 'Thanks', component: ThanksView, meta: { showSearch: true } },
+  { path: '/omoss', name: 'Om-oss', component: OmOssView, meta: { showSearch: true } },
 ]
 
 const router = createRouter({
