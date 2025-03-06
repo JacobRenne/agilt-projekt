@@ -24,6 +24,11 @@
                   <router-link to="/sell"
                     class="footer-link nav-link text-white-50 p-0">Sälj</router-link>
                 </li>
+                <li class="nav-item mb-2">
+                  <router-link to="/omoss"
+                    class="footer-link nav-link text-white-50 p-0">Om
+                    oss</router-link>
+                </li>
               </ul>
             </div>
 
