@@ -21,11 +21,14 @@ const handleSubmit = async () => {
   }
 
   try {
-    const response = await axios.post("https://67c6b656351c081993fe6431.mockapi.io/users", {
-      name: name.value,
-      email: email.value,
-      password: password.value,
-    });
+    const response = await axios.post(
+      "https://67c6b656351c081993fe6431.mockapi.io/users",
+      {
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      }
+    );
     console.log("Account created:", response.data);
     errorMessage.value = "";
     sessionStorage.setItem("isLoggedIn", "true");
@@ -40,9 +43,13 @@ const handleSubmit = async () => {
 
 const handleLogin = async () => {
   try {
-    const response = await axios.get("https://67c6b656351c081993fe6431.mockapi.io/users");
+    const response = await axios.get(
+      "https://67c6b656351c081993fe6431.mockapi.io/users"
+    );
     const users = response.data;
-    const user = users.find((user) => user.email === email.value && user.password === password.value);
+    const user = users.find(
+      (user) => user.email === email.value && user.password === password.value
+    );
 
     if (user) {
       sessionStorage.setItem("isLoggedIn", "true");
@@ -59,14 +66,14 @@ const handleLogin = async () => {
   }
 };
 
-const createAccount = ref(true); // Set to false to disable form
+const createAccount = ref(true);
 </script>
 
 <template>
   <section class="profil-section mt-5 mb-5">
-    <div class="container ">
+    <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-6 ">
+        <div class="col-md-6">
           <div class="card">
             <div v-if="createAccount">
               <div class="card-header">
@@ -76,33 +83,59 @@ const createAccount = ref(true); // Set to false to disable form
                 <form @submit.prevent="handleSubmit">
                   <div class="form-group">
                     <label for="text">Fullständigt namn</label>
-                    <input type="text" class="form-control" id="name"
-                      v-model="name" required />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      v-model="name"
+                      required
+                    />
                   </div>
                   <div class="form-group">
                     <label for="email">E-postadress</label>
-                    <input type="email" class="form-control" id="email"
-                      v-model="email" required />
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      v-model="email"
+                      required
+                    />
                   </div>
                   <div class="form-group">
                     <label for="password">Lösenord</label>
-                    <input type="password" class="form-control" id="password"
-                      v-model="password" required />
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      v-model="password"
+                      required
+                    />
                   </div>
                   <div class="form-group">
                     <label for="confirmPassword">Bekräfta lösenord</label>
-                    <input type="password" class="form-control"
-                      id="confirmPassword" v-model="confirmPassword" required />
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="confirmPassword"
+                      v-model="confirmPassword"
+                      required
+                    />
                   </div>
-                  <button type="submit"
-                    class="btn btn-primary mt-2 d-flex ms-auto">Skapa
-                    konto</button>
-                  <div v-if="errorMessage" class="alert alert-danger mt-3">{{
-                    errorMessage }}</div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary mt-2 d-flex ms-auto"
+                  >
+                    Skapa konto
+                  </button>
+                  <div v-if="errorMessage" class="alert alert-danger mt-3">
+                    {{ errorMessage }}
+                  </div>
                 </form>
                 <p class="text-center mt-3">
-                  Har du redan ett konto? <a href="#" class="text-info"
-                    @click="createAccount = false">Logga in</a>
+                  Har du redan ett konto?
+                  <a href="#" class="text-info" @click="createAccount = false"
+                    >Logga in</a
+                  >
                 </p>
               </div>
             </div>
@@ -114,22 +147,38 @@ const createAccount = ref(true); // Set to false to disable form
                 <form @submit.prevent="handleLogin">
                   <div class="form-group">
                     <label for="email">E-postadress</label>
-                    <input type="email" class="form-control" id="email"
-                      v-model="email" required />
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      v-model="email"
+                      required
+                    />
                   </div>
                   <div class="form-group">
                     <label for="password">Lösenord</label>
-                    <input type="password" class="form-control" id="password"
-                      v-model="password" required />
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      v-model="password"
+                      required
+                    />
                   </div>
-                  <button type="submit"
-                    class="btn btn-primary btn-block mt-2 d-flex ms-auto">Logga
-                    in</button>
-                  <div v-if="errorMessage" class="alert alert-danger mt-3">{{
-                    errorMessage }}</div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-block mt-2 d-flex ms-auto"
+                  >
+                    Logga in
+                  </button>
+                  <div v-if="errorMessage" class="alert alert-danger mt-3">
+                    {{ errorMessage }}
+                  </div>
                   <p class="text-center mt-3">
-                    Har du inget konto? <a href="#" class="text-info"
-                      @click="createAccount = true">Skapa konto</a>
+                    Har du inget konto?
+                    <a href="#" class="text-info" @click="createAccount = true"
+                      >Skapa konto</a
+                    >
                   </p>
                 </form>
               </div>
@@ -142,59 +191,49 @@ const createAccount = ref(true); // Set to false to disable form
 </template>
 
 <style scoped>
-.card
-{
+.card {
   background-color: #333333;
   color: white;
 }
 
-.card-header
-{
+.card-header {
   background-color: #444444;
 }
 
-.form-control
-{
+.form-control {
   background-color: #555555;
   color: white;
   border: 1px solid #666666;
 }
 
-.btn-primary
-{
+.btn-primary {
   background-color: #007bff;
   border-color: #007bff;
 }
 
-.alert-danger
-{
+.alert-danger {
   background-color: #ff4d4d;
   border-color: #ff4d4d;
   color: white;
 }
 
-.profil-section
-{
-  background: #121212
+.profil-section {
+  background: #121212;
 }
 
-.btn-primary
-{
+.btn-primary {
   background-color: #bb81f8;
 }
 
-.btn-primary:hover
-{
+.btn-primary:hover {
   background-color: #9a67ea;
 }
 
-.text-info
-{
-  color: #bb81f8 !important
+.text-info {
+  color: #bb81f8 !important;
 }
 
-.text-info:hover
-{
-  color: #9a67ea !important
+.text-info:hover {
+  color: #9a67ea !important;
 }
 </style>
